@@ -135,38 +135,13 @@
     <div class="repo-stats" id="repo-stats">
       <!-- Estatísticas do repositório serão exibidas aqui -->
       <h3>Estatísticas do Repositório</h3>
-      <div id="stats-values">
-        <!-- Valores serão atualizados via JS -->
-      </div>
+<div class="github-card" data-user="azurejoga" data-repo="brasilware"></div> 
+<script src="https://cdn.jsdelivr.net/gh/lepture/github-cards@latest/jsdelivr/widget.js"></script>
     </div>
     <div class="repo-actions">
       <button id="star-button" title="Estrelar repositório">⭐ Star</button>
       <button id="pull-button" title="Criar Pull Request">🔀 Pull Request</button>
       <button id="issue-button" title="Abrir Issue">🐞 Abrir Issue</button>
-    </div>
-  </section>
-
-  <!-- Seção de Commits Recentes -->
-  <section id="commits" class="container data-section">
-    <h2>Commits Recentes</h2>
-    <div class="data-feed" id="commits-feed">
-      <!-- Os últimos 5 commits serão inseridos aqui -->
-    </div>
-  </section>
-
-  <!-- Seção de Pull Requests Recentes -->
-  <section id="pulls" class="container data-section">
-    <h2>Pull Requests Recentes</h2>
-    <div class="data-feed" id="pulls-feed">
-      <!-- Os pull requests recentes serão inseridos aqui -->
-    </div>
-  </section>
-
-  <!-- Seção de Problemas Abertos Recentemente -->
-  <section id="issues" class="container data-section">
-    <h2>Problemas Abertos Recentemente</h2>
-    <div class="data-feed" id="issues-feed">
-      <!-- As issues recentes serão inseridas aqui -->
     </div>
   </section>
 
@@ -182,107 +157,6 @@
     const owner = 'azurejoga';
     const repo = 'BrasilWare';
     const repoUrl = `https://api.github.com/repos/${owner}/${repo}`;
-    const commitsUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=5`;
-    const pullsUrl = `https://api.github.com/repos/${owner}/${repo}/pulls?state=open&per_page=5`;
-    const issuesUrl = `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=5`;
-
-    async function fetchRepoData() {
-      try {
-        // Buscar dados do repositório
-        const repoResponse = await fetch(repoUrl);
-        if (!repoResponse.ok) {
-          throw new Error(`Erro ${repoResponse.status} ao buscar repositório`);
-        }
-        const repoData = await repoResponse.json();
-
-        // Buscar Pull Requests
-        const pullsResponse = await fetch(pullsUrl);
-        let pullsData = [];
-        if (pullsResponse.ok) {
-          pullsData = await pullsResponse.json();
-        } else {
-          console.error(`Erro ${pullsResponse.status} ao buscar PRs`);
-        }
-
-        // Buscar Issues (excluindo pull requests)
-        const issuesResponse = await fetch(issuesUrl);
-        let issuesData = [];
-        if (issuesResponse.ok) {
-          issuesData = await issuesResponse.json();
-          if (Array.isArray(issuesData)) {
-            issuesData = issuesData.filter(issue => !issue.pull_request);
-          } else {
-            issuesData = [];
-          }
-        } else {
-          console.error(`Erro ${issuesResponse.status} ao buscar Issues`);
-        }
-
-        // Atualizar cabeçalho de estatísticas
-        const statsValues = `
-          <span>Estrelas: ${repoData.stargazers_count || 0}</span> | 
-          <span>PRs Abertos: ${pullsData.length || 0}</span> | 
-          <span>Issues Abertas: ${issuesData.length || 0}</span>
-        `;
-        document.getElementById('stats-values').innerHTML = statsValues;
-
-        // Buscar Commits
-        const commitsResponse = await fetch(commitsUrl);
-        if (!commitsResponse.ok) {
-          throw new Error(`Erro ${commitsResponse.status} ao buscar commits`);
-        }
-        const commitsData = await commitsResponse.json();
-        const commitsFeed = document.getElementById('commits-feed');
-        commitsFeed.innerHTML = '';
-        if (Array.isArray(commitsData)) {
-          commitsData.forEach(commit => {
-            const commitDiv = document.createElement('div');
-            commitDiv.classList.add('data-item');
-            commitDiv.innerHTML = `
-              <strong>Commit: ${commit.sha.substring(0, 7)}</strong>
-              <p><em>Autor:</em> ${commit.commit.author.name} – ${new Date(commit.commit.author.date).toLocaleString()}</p>
-              <p><em>Mensagem:</em> ${commit.commit.message}</p>
-            `;
-            commitsFeed.appendChild(commitDiv);
-          });
-        }
-        
-        // Atualizar Pull Requests
-        const pullsFeed = document.getElementById('pulls-feed');
-        pullsFeed.innerHTML = '';
-        if (Array.isArray(pullsData)) {
-          pullsData.forEach(pull => {
-            const pullDiv = document.createElement('div');
-            pullDiv.classList.add('data-item');
-            pullDiv.innerHTML = `
-              <strong>PR: ${pull.title}</strong>
-              <p><em>Aberto por:</em> ${pull.user.login}</p>
-              <p><em>Descrição:</em> ${pull.body ? pull.body.substring(0, 150) + (pull.body.length > 150 ? '...' : '') : 'Sem descrição.'}</p>
-            `;
-            pullsFeed.appendChild(pullDiv);
-          });
-        }
-        
-        // Atualizar Issues
-        const issuesFeed = document.getElementById('issues-feed');
-        issuesFeed.innerHTML = '';
-        if (Array.isArray(issuesData)) {
-          issuesData.forEach(issue => {
-            const issueDiv = document.createElement('div');
-            issueDiv.classList.add('data-item');
-            issueDiv.innerHTML = `
-              <strong>Issue: ${issue.title}</strong>
-              <p><em>Aberta por:</em> ${issue.user.login}</p>
-              <p><em>Descrição:</em> ${issue.body ? issue.body.substring(0, 150) + (issue.body.length > 150 ? '...' : '') : 'Sem descrição.'}</p>
-            `;
-            issuesFeed.appendChild(issueDiv);
-          });
-        }
-      } catch (error) {
-        console.error('Erro ao buscar dados do repositório:', error);
-      }
-    }
-
     // Ações dos botões
     document.getElementById('star-button').addEventListener('click', () => {
       window.open(`https://github.com/${owner}/${repo}/stargazers`, '_blank');
@@ -293,8 +167,6 @@
     document.getElementById('issue-button').addEventListener('click', () => {
       window.open(`https://github.com/${owner}/${repo}/issues/new`, '_blank');
     });
-
-    fetchRepoData();
   </script>
 </body>
 </html>
