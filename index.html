@@ -35,6 +35,7 @@
     .feature h3 { margin-bottom: 15px; }
     /* Cabeçalho de Estatísticas do Repositório */
     .repo-stats { background: #fff; padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; margin-bottom: 20px; }
+    .repo-stats h3 { margin-bottom: 10px; }
     .repo-stats span { margin: 0 10px; font-weight: bold; }
     /* Área de Ações do Repositório */
     .repo-actions { background: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
@@ -133,6 +134,10 @@
   <section class="container">
     <div class="repo-stats" id="repo-stats">
       <!-- Estatísticas do repositório serão exibidas aqui -->
+      <h3>Estatísticas do Repositório</h3>
+      <div id="stats-values">
+        <!-- Valores serão atualizados via JS -->
+      </div>
     </div>
     <div class="repo-actions">
       <button id="star-button" title="Estrelar repositório">⭐ Star</button>
@@ -183,69 +188,96 @@
 
     async function fetchRepoData() {
       try {
-        // Buscar dados do repositório para estatísticas
+        // Buscar dados do repositório
         const repoResponse = await fetch(repoUrl);
+        if (!repoResponse.ok) {
+          throw new Error(`Erro ${repoResponse.status} ao buscar repositório`);
+        }
         const repoData = await repoResponse.json();
 
-        // Fetch de pull requests
+        // Buscar Pull Requests
         const pullsResponse = await fetch(pullsUrl);
-        const pullsData = await pullsResponse.json();
+        let pullsData = [];
+        if (pullsResponse.ok) {
+          pullsData = await pullsResponse.json();
+        } else {
+          console.error(`Erro ${pullsResponse.status} ao buscar PRs`);
+        }
 
-        // Fetch de issues (excluindo pull requests)
+        // Buscar Issues (excluindo pull requests)
         const issuesResponse = await fetch(issuesUrl);
-        const issuesData = await issuesResponse.json();
-        const issuesCount = issuesData.filter(issue => !issue.pull_request).length;
+        let issuesData = [];
+        if (issuesResponse.ok) {
+          issuesData = await issuesResponse.json();
+          if (Array.isArray(issuesData)) {
+            issuesData = issuesData.filter(issue => !issue.pull_request);
+          } else {
+            issuesData = [];
+          }
+        } else {
+          console.error(`Erro ${issuesResponse.status} ao buscar Issues`);
+        }
 
         // Atualizar cabeçalho de estatísticas
-        document.getElementById('repo-stats').innerHTML = `
-          <span>Estrelas: ${repoData.stargazers_count}</span> | 
-          <span>PRs Abertos: ${pullsData.length}</span> | 
-          <span>Issues Abertas: ${issuesCount}</span>
+        const statsValues = `
+          <span>Estrelas: ${repoData.stargazers_count || 0}</span> | 
+          <span>PRs Abertos: ${pullsData.length || 0}</span> | 
+          <span>Issues Abertas: ${issuesData.length || 0}</span>
         `;
+        document.getElementById('stats-values').innerHTML = statsValues;
 
-        // Fetch de commits
+        // Buscar Commits
         const commitsResponse = await fetch(commitsUrl);
+        if (!commitsResponse.ok) {
+          throw new Error(`Erro ${commitsResponse.status} ao buscar commits`);
+        }
         const commitsData = await commitsResponse.json();
         const commitsFeed = document.getElementById('commits-feed');
         commitsFeed.innerHTML = '';
-        commitsData.forEach(commit => {
-          const commitDiv = document.createElement('div');
-          commitDiv.classList.add('data-item');
-          commitDiv.innerHTML = `
-            <strong>Commit: ${commit.sha.substring(0, 7)}</strong>
-            <p><em>Autor:</em> ${commit.commit.author.name} – ${new Date(commit.commit.author.date).toLocaleString()}</p>
-            <p><em>Mensagem:</em> ${commit.commit.message}</p>
-          `;
-          commitsFeed.appendChild(commitDiv);
-        });
-
+        if (Array.isArray(commitsData)) {
+          commitsData.forEach(commit => {
+            const commitDiv = document.createElement('div');
+            commitDiv.classList.add('data-item');
+            commitDiv.innerHTML = `
+              <strong>Commit: ${commit.sha.substring(0, 7)}</strong>
+              <p><em>Autor:</em> ${commit.commit.author.name} – ${new Date(commit.commit.author.date).toLocaleString()}</p>
+              <p><em>Mensagem:</em> ${commit.commit.message}</p>
+            `;
+            commitsFeed.appendChild(commitDiv);
+          });
+        }
+        
         // Atualizar Pull Requests
         const pullsFeed = document.getElementById('pulls-feed');
         pullsFeed.innerHTML = '';
-        pullsData.forEach(pull => {
-          const pullDiv = document.createElement('div');
-          pullDiv.classList.add('data-item');
-          pullDiv.innerHTML = `
-            <strong>PR: ${pull.title}</strong>
-            <p><em>Aberto por:</em> ${pull.user.login}</p>
-            <p><em>Descrição:</em> ${pull.body ? pull.body.substring(0, 150) + (pull.body.length > 150 ? '...' : '') : 'Sem descrição.'}</p>
-          `;
-          pullsFeed.appendChild(pullDiv);
-        });
-
+        if (Array.isArray(pullsData)) {
+          pullsData.forEach(pull => {
+            const pullDiv = document.createElement('div');
+            pullDiv.classList.add('data-item');
+            pullDiv.innerHTML = `
+              <strong>PR: ${pull.title}</strong>
+              <p><em>Aberto por:</em> ${pull.user.login}</p>
+              <p><em>Descrição:</em> ${pull.body ? pull.body.substring(0, 150) + (pull.body.length > 150 ? '...' : '') : 'Sem descrição.'}</p>
+            `;
+            pullsFeed.appendChild(pullDiv);
+          });
+        }
+        
         // Atualizar Issues
         const issuesFeed = document.getElementById('issues-feed');
         issuesFeed.innerHTML = '';
-        issuesData.filter(issue => !issue.pull_request).forEach(issue => {
-          const issueDiv = document.createElement('div');
-          issueDiv.classList.add('data-item');
-          issueDiv.innerHTML = `
-            <strong>Issue: ${issue.title}</strong>
-            <p><em>Aberta por:</em> ${issue.user.login}</p>
-            <p><em>Descrição:</em> ${issue.body ? issue.body.substring(0, 150) + (issue.body.length > 150 ? '...' : '') : 'Sem descrição.'}</p>
-          `;
-          issuesFeed.appendChild(issueDiv);
-        });
+        if (Array.isArray(issuesData)) {
+          issuesData.forEach(issue => {
+            const issueDiv = document.createElement('div');
+            issueDiv.classList.add('data-item');
+            issueDiv.innerHTML = `
+              <strong>Issue: ${issue.title}</strong>
+              <p><em>Aberta por:</em> ${issue.user.login}</p>
+              <p><em>Descrição:</em> ${issue.body ? issue.body.substring(0, 150) + (issue.body.length > 150 ? '...' : '') : 'Sem descrição.'}</p>
+            `;
+            issuesFeed.appendChild(issueDiv);
+          });
+        }
       } catch (error) {
         console.error('Erro ao buscar dados do repositório:', error);
       }
