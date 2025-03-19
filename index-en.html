@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BrasilWare - Brazilian Malware Analysis Platform</title>
+  <title>BrasilWare - Malware Analysis Platform</title>
   <style>
-    /* Basic reset and styles */
+    /* Reset and basic styles */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background: #f4f4f4; }
     .container { width: 90%; max-width: 1200px; margin: auto; }
@@ -25,7 +25,7 @@
     .btn { background: #ff9900; color: #fff; padding: 15px 30px; border: none; border-radius: 5px; font-size: 1em; cursor: pointer; text-decoration: none; transition: background 0.3s; }
     .btn:hover { background: #e68a00; }
     section { padding: 60px 0; }
-    /* About section */
+    /* About Section */
     #about { text-align: center; }
     #about h2 { font-size: 2em; margin-bottom: 20px; }
     #about p { font-size: 1.1em; max-width: 800px; margin: auto; }
@@ -33,15 +33,20 @@
     .features { display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 40px; }
     .feature { flex: 1 1 45%; background: #fff; padding: 20px; margin: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .feature h3 { margin-bottom: 15px; }
-    /* Repository Social Section */
-    .repo-social { background: #fff; padding: 40px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .repo-social h2 { margin-bottom: 20px; text-align: center; }
-    .repo-actions { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
-    .repo-actions button { background: #0055a5; color: #fff; border: none; padding: 10px 20px; border-radius: 3px; cursor: pointer; transition: background 0.3s; }
+    /* Repository Statistics Header */
+    .repo-stats { background: #fff; padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; margin-bottom: 20px; }
+    .repo-stats span { margin: 0 10px; font-weight: bold; }
+    /* Repository Actions */
+    .repo-actions { background: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+    .repo-actions button { background: #0055a5; color: #fff; border: none; padding: 10px 20px; margin: 5px; border-radius: 3px; cursor: pointer; transition: background 0.3s; }
     .repo-actions button:hover { background: #004080; }
-    .commit-feed { max-height: 300px; overflow-y: auto; }
-    .commit { border-bottom: 1px solid #ddd; padding: 10px 0; }
-    .commit:last-child { border: none; }
+    /* GitHub Data Sections */
+    .data-section { background: #fff; padding: 40px; margin-top: 40px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .data-section h2 { margin-bottom: 20px; text-align: center; }
+    .data-feed { max-height: 400px; overflow-y: auto; }
+    .data-item { border-bottom: 1px solid #ddd; padding: 10px 0; }
+    .data-item:last-child { border: none; }
+    .data-item strong { display: block; margin-bottom: 5px; }
     footer { background: #333; color: #fff; text-align: center; padding: 20px 0; margin-top: 40px; }
     footer p { font-size: 0.9em; }
     @media (max-width: 768px) {
@@ -49,7 +54,6 @@
       .feature { flex: 1 1 100%; margin: 10px 0; }
       nav ul { flex-direction: column; }
       nav ul li { margin: 10px 0; }
-      .repo-actions { flex-direction: column; }
     }
   </style>
 </head>
@@ -60,15 +64,15 @@
       <nav>
         <div class="logo">BrasilWare</div>
         <ul>
-          <li><a href="#social">Commits</a></li>
+          <li><a href="#commits">Commits</a></li>
           <li><a href="#about">Documentation</a></li>
-          <li><a href="#features">Pull Requests</a></li>
-          <li><a href="#social">Community</a></li>
+          <li><a href="#pulls">Pull Requests</a></li>
+          <li><a href="#issues">Issues</a></li>
         </ul>
         <div class="language-selector">
-          <a href="index.html">PT</a>
-          <a href="index-en.html">EN</a>
+          <a href="index.html">EN</a>
           <a href="index-es.html">ES</a>
+          <a href="index-pt.html">PT</a>
         </div>
       </nav>
     </div>
@@ -78,7 +82,7 @@
   <section class="hero">
     <div class="hero-content container">
       <h1>BrasilWare</h1>
-      <p>Brazilian malware analysis platform with modular and efficient tools.</p>
+      <p>A Brazilian platform for malware analysis with modular and efficient tools.</p>
       <a href="#features" class="btn">Explore Modules</a>
     </div>
   </section>
@@ -87,7 +91,7 @@
   <section id="about" class="container">
     <h2>Simplified and Powerful Analysis</h2>
     <p>
-      BrasilWare offers an intuitive platform for malware analysis, allowing cybersecurity professionals to quickly and efficiently identify threats. With our modular architecture, you can customize your analysis environment and expand functionalities as needed.
+      BrasilWare offers an intuitive platform for malware analysis, enabling information security professionals to quickly and efficiently identify threats. With our modular architecture, you can customize your analysis environment and expand functionality as needed.
     </p>
     <div style="margin-top: 20px;">
       <a href="https://brasilware.github.io/docs" class="btn" style="margin-right:10px;">Learn More</a>
@@ -99,15 +103,15 @@
   <section id="features" class="container">
     <div class="features">
       <div class="feature">
-        <h3>Security Code</h3>
+        <h3>Features</h3>
         <p>
-          Integrate artificial intelligence tools to generate reports and enhance threat detection.
+          Integrate artificial intelligence tools to regenerate reports and improve threat detection.
         </p>
       </div>
       <div class="feature">
         <h3>Modular Analysis</h3>
         <p>
-          Install and run various analysis modules to detect and classify different types of malware.
+          Install and run different analysis modules to detect and classify various types of malware.
         </p>
       </div>
       <div class="feature">
@@ -119,30 +123,45 @@
       <div class="feature">
         <h3>Customization</h3>
         <p>
-          Tailor the platform to your needs with theme, language, and custom module configurations.
+          Tailor the platform to your needs with theme, language, and module settings.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Repository Social Section (Real Data) -->
-  <section id="social" class="container">
-    <div class="repo-social">
-      <h2>Repository Community</h2>
-      <div class="repo-actions">
-        <button id="star-button" title="Star">
-          ⭐ Star (<span id="stars-count">0</span>)
-        </button>
-        <button id="pull-button" title="Pull Request">
-          🔀 Pull Request (<span id="pulls-count">0</span>)
-        </button>
-        <button id="issue-button" title="Open Issue">
-          🐞 Open Issue (<span id="issues-count">0</span>)
-        </button>
-      </div>
-      <div class="commit-feed" id="commit-feed">
-        <!-- The latest 5 commits will be inserted here -->
-      </div>
+  <!-- Repository Statistics Header with Actions -->
+  <section class="container">
+    <div class="repo-stats" id="repo-stats">
+      <!-- Repository statistics will be displayed here -->
+    </div>
+    <div class="repo-actions">
+      <button id="star-button" title="Star repository">⭐ Star</button>
+      <button id="pull-button" title="Create Pull Request">🔀 Pull Request</button>
+      <button id="issue-button" title="Open Issue">🐞 Open Issue</button>
+    </div>
+  </section>
+
+  <!-- Recent Commits Section -->
+  <section id="commits" class="container data-section">
+    <h2>Recent Commits</h2>
+    <div class="data-feed" id="commits-feed">
+      <!-- The latest 5 commits will be inserted here -->
+    </div>
+  </section>
+
+  <!-- Recent Pull Requests Section -->
+  <section id="pulls" class="container data-section">
+    <h2>Recent Pull Requests</h2>
+    <div class="data-feed" id="pulls-feed">
+      <!-- The recent pull requests will be inserted here -->
+    </div>
+  </section>
+
+  <!-- Recent Issues Section -->
+  <section id="issues" class="container data-section">
+    <h2>Recent Issues</h2>
+    <div class="data-feed" id="issues-feed">
+      <!-- The recent issues will be inserted here -->
     </div>
   </section>
 
@@ -153,56 +172,97 @@
     </div>
   </footer>
 
-  <!-- Script for GitHub API integration -->
+  <!-- GitHub API Integration Script -->
   <script>
-    const owner = 'BrasilWare';
+    const owner = 'azurejoga';
     const repo = 'BrasilWare';
-    const commitsUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=5`;
     const repoUrl = `https://api.github.com/repos/${owner}/${repo}`;
-    const pullsUrl = `https://api.github.com/repos/${owner}/${repo}/pulls?state=open`;
-    const issuesUrl = `https://api.github.com/repos/${owner}/${repo}/issues?state=open`;
+    const commitsUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=5`;
+    const pullsUrl = `https://api.github.com/repos/${owner}/${repo}/pulls?state=open&per_page=5`;
+    const issuesUrl = `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=5`;
 
     async function fetchRepoData() {
       try {
+        // Fetch repository data for statistics
         const repoResponse = await fetch(repoUrl);
         const repoData = await repoResponse.json();
-        document.getElementById('stars-count').textContent = repoData.stargazers_count || 0;
 
-        const commitsResponse = await fetch(commitsUrl);
-        const commitsData = await commitsResponse.json();
-        const commitFeed = document.getElementById('commit-feed');
-        commitFeed.innerHTML = '';
-        commitsData.forEach(commit => {
-          const commitDiv = document.createElement('div');
-          commitDiv.classList.add('commit');
-          commitDiv.innerHTML = `<strong>${commit.sha.substring(0, 7)}</strong><p>${commit.commit.message}</p>`;
-          commitFeed.appendChild(commitDiv);
-        });
-
+        // Fetch pull requests
         const pullsResponse = await fetch(pullsUrl);
         const pullsData = await pullsResponse.json();
-        document.getElementById('pulls-count').textContent = pullsData.length || 0;
 
+        // Fetch issues (excluding pull requests)
         const issuesResponse = await fetch(issuesUrl);
         const issuesData = await issuesResponse.json();
         const issuesCount = issuesData.filter(issue => !issue.pull_request).length;
-        document.getElementById('issues-count').textContent = issuesCount || 0;
+
+        // Update repository statistics header
+        document.getElementById('repo-stats').innerHTML = `
+          <span>Stars: ${repoData.stargazers_count}</span> | 
+          <span>Open PRs: ${pullsData.length}</span> | 
+          <span>Open Issues: ${issuesCount}</span>
+        `;
+
+        // Fetch commits
+        const commitsResponse = await fetch(commitsUrl);
+        const commitsData = await commitsResponse.json();
+        const commitsFeed = document.getElementById('commits-feed');
+        commitsFeed.innerHTML = '';
+        commitsData.forEach(commit => {
+          const commitDiv = document.createElement('div');
+          commitDiv.classList.add('data-item');
+          commitDiv.innerHTML = `
+            <strong>Commit: ${commit.sha.substring(0, 7)}</strong>
+            <p><em>Author:</em> ${commit.commit.author.name} – ${new Date(commit.commit.author.date).toLocaleString()}</p>
+            <p><em>Message:</em> ${commit.commit.message}</p>
+          `;
+          commitsFeed.appendChild(commitDiv);
+        });
+
+        // Update Pull Requests
+        const pullsFeed = document.getElementById('pulls-feed');
+        pullsFeed.innerHTML = '';
+        pullsData.forEach(pull => {
+          const pullDiv = document.createElement('div');
+          pullDiv.classList.add('data-item');
+          pullDiv.innerHTML = `
+            <strong>PR: ${pull.title}</strong>
+            <p><em>Opened by:</em> ${pull.user.login}</p>
+            <p><em>Description:</em> ${pull.body ? pull.body.substring(0, 150) + (pull.body.length > 150 ? '...' : '') : 'No description.'}</p>
+          `;
+          pullsFeed.appendChild(pullDiv);
+        });
+
+        // Update Issues
+        const issuesFeed = document.getElementById('issues-feed');
+        issuesFeed.innerHTML = '';
+        issuesData.filter(issue => !issue.pull_request).forEach(issue => {
+          const issueDiv = document.createElement('div');
+          issueDiv.classList.add('data-item');
+          issueDiv.innerHTML = `
+            <strong>Issue: ${issue.title}</strong>
+            <p><em>Opened by:</em> ${issue.user.login}</p>
+            <p><em>Description:</em> ${issue.body ? issue.body.substring(0, 150) + (issue.body.length > 150 ? '...' : '') : 'No description.'}</p>
+          `;
+          issuesFeed.appendChild(issueDiv);
+        });
       } catch (error) {
         console.error('Error fetching repository data:', error);
       }
     }
 
-    fetchRepoData();
-
+    // Button actions
     document.getElementById('star-button').addEventListener('click', () => {
       window.open(`https://github.com/${owner}/${repo}/stargazers`, '_blank');
     });
     document.getElementById('pull-button').addEventListener('click', () => {
-      window.open(`https://github.com/${owner}/${repo}/pulls`, '_blank');
+      window.open(`https://github.com/${owner}/${repo}/compare`, '_blank');
     });
     document.getElementById('issue-button').addEventListener('click', () => {
-      window.open(`https://github.com/${owner}/${repo}/issues`, '_blank');
+      window.open(`https://github.com/${owner}/${repo}/issues/new`, '_blank');
     });
+
+    fetchRepoData();
   </script>
 </body>
 </html>

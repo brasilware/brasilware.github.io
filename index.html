@@ -33,12 +33,15 @@
     .features { display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 40px; }
     .feature { flex: 1 1 45%; background: #fff; padding: 20px; margin: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .feature h3 { margin-bottom: 15px; }
+    /* Cabeçalho de Estatísticas do Repositório */
+    .repo-stats { background: #fff; padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; margin-bottom: 20px; }
+    .repo-stats span { margin: 0 10px; font-weight: bold; }
     /* Área de Ações do Repositório */
-    .repo-actions { background: #fff; padding: 20px; margin-bottom: 40px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+    .repo-actions { background: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
     .repo-actions button { background: #0055a5; color: #fff; border: none; padding: 10px 20px; margin: 5px; border-radius: 3px; cursor: pointer; transition: background 0.3s; }
     .repo-actions button:hover { background: #004080; }
     /* Seções de dados do GitHub */
-    .data-section { background: #fff; padding: 40px; margin-bottom: 40px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .data-section { background: #fff; padding: 40px; margin-top: 40px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .data-section h2 { margin-bottom: 20px; text-align: center; }
     .data-feed { max-height: 400px; overflow-y: auto; }
     .data-item { border-bottom: 1px solid #ddd; padding: 10px 0; }
@@ -100,7 +103,7 @@
   <section id="features" class="container">
     <div class="features">
       <div class="feature">
-        <h3>Código de Segurança</h3>
+        <h3>Características</h3>
         <p>
           Integre ferramentas de inteligência artificial para recriar relatórios e aprimorar a detecção de ameaças.
         </p>
@@ -126,11 +129,16 @@
     </div>
   </section>
 
-  <!-- Seção de Ações do Repositório -->
-  <section class="container repo-actions">
-    <button id="star-button" title="Estrelar repositório">⭐ Star</button>
-    <button id="pull-button" title="Criar Pull Request">🔀 Pull Request</button>
-    <button id="issue-button" title="Abrir Issue">🐞 Abrir Issue</button>
+  <!-- Cabeçalho de Estatísticas do Repositório com Ações -->
+  <section class="container">
+    <div class="repo-stats" id="repo-stats">
+      <!-- Estatísticas do repositório serão exibidas aqui -->
+    </div>
+    <div class="repo-actions">
+      <button id="star-button" title="Estrelar repositório">⭐ Star</button>
+      <button id="pull-button" title="Criar Pull Request">🔀 Pull Request</button>
+      <button id="issue-button" title="Abrir Issue">🐞 Abrir Issue</button>
+    </div>
   </section>
 
   <!-- Seção de Commits Recentes -->
@@ -168,12 +176,33 @@
   <script>
     const owner = 'azurejoga';
     const repo = 'BrasilWare';
+    const repoUrl = `https://api.github.com/repos/${owner}/${repo}`;
     const commitsUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=5`;
     const pullsUrl = `https://api.github.com/repos/${owner}/${repo}/pulls?state=open&per_page=5`;
     const issuesUrl = `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=5`;
 
     async function fetchRepoData() {
       try {
+        // Buscar dados do repositório para estatísticas
+        const repoResponse = await fetch(repoUrl);
+        const repoData = await repoResponse.json();
+
+        // Fetch de pull requests
+        const pullsResponse = await fetch(pullsUrl);
+        const pullsData = await pullsResponse.json();
+
+        // Fetch de issues (excluindo pull requests)
+        const issuesResponse = await fetch(issuesUrl);
+        const issuesData = await issuesResponse.json();
+        const issuesCount = issuesData.filter(issue => !issue.pull_request).length;
+
+        // Atualizar cabeçalho de estatísticas
+        document.getElementById('repo-stats').innerHTML = `
+          <span>Estrelas: ${repoData.stargazers_count}</span> | 
+          <span>PRs Abertos: ${pullsData.length}</span> | 
+          <span>Issues Abertas: ${issuesCount}</span>
+        `;
+
         // Fetch de commits
         const commitsResponse = await fetch(commitsUrl);
         const commitsData = await commitsResponse.json();
@@ -190,9 +219,7 @@
           commitsFeed.appendChild(commitDiv);
         });
 
-        // Fetch de pull requests
-        const pullsResponse = await fetch(pullsUrl);
-        const pullsData = await pullsResponse.json();
+        // Atualizar Pull Requests
         const pullsFeed = document.getElementById('pulls-feed');
         pullsFeed.innerHTML = '';
         pullsData.forEach(pull => {
@@ -206,9 +233,7 @@
           pullsFeed.appendChild(pullDiv);
         });
 
-        // Fetch de issues (excluindo pull requests)
-        const issuesResponse = await fetch(issuesUrl);
-        const issuesData = await issuesResponse.json();
+        // Atualizar Issues
         const issuesFeed = document.getElementById('issues-feed');
         issuesFeed.innerHTML = '';
         issuesData.filter(issue => !issue.pull_request).forEach(issue => {
