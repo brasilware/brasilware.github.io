@@ -33,15 +33,13 @@
     .features { display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 40px; }
     .feature { flex: 1 1 45%; background: #fff; padding: 20px; margin: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .feature h3 { margin-bottom: 15px; }
-    /* Rede Social do Repositório */
-    .repo-social { background: #fff; padding: 40px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .repo-social h2 { margin-bottom: 20px; text-align: center; }
-    .repo-actions { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
-    .repo-actions button { background: #0055a5; color: #fff; border: none; padding: 10px 20px; border-radius: 3px; cursor: pointer; transition: background 0.3s; }
-    .repo-actions button:hover { background: #004080; }
-    .commit-feed { max-height: 300px; overflow-y: auto; }
-    .commit { border-bottom: 1px solid #ddd; padding: 10px 0; }
-    .commit:last-child { border: none; }
+    /* Seções de dados do GitHub */
+    .data-section { background: #fff; padding: 40px; margin-bottom: 40px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .data-section h2 { margin-bottom: 20px; text-align: center; }
+    .data-feed { max-height: 400px; overflow-y: auto; }
+    .data-item { border-bottom: 1px solid #ddd; padding: 10px 0; }
+    .data-item:last-child { border: none; }
+    .data-item strong { display: block; margin-bottom: 5px; }
     footer { background: #333; color: #fff; text-align: center; padding: 20px 0; margin-top: 40px; }
     footer p { font-size: 0.9em; }
     @media (max-width: 768px) {
@@ -49,7 +47,6 @@
       .feature { flex: 1 1 100%; margin: 10px 0; }
       nav ul { flex-direction: column; }
       nav ul li { margin: 10px 0; }
-      .repo-actions { flex-direction: column; }
     }
   </style>
 </head>
@@ -60,10 +57,10 @@
       <nav>
         <div class="logo">BrasilWare</div>
         <ul>
-          <li><a href="#social">Commits</a></li>
+          <li><a href="#commits">Commits</a></li>
           <li><a href="#about">Documentação</a></li>
-          <li><a href="#features">Pull Requests</a></li>
-          <li><a href="#social">Rede Social</a></li>
+          <li><a href="#pulls">Pull Requests</a></li>
+          <li><a href="#issues">Problemas</a></li>
         </ul>
         <div class="language-selector">
           <a href="index.html">PT</a>
@@ -125,24 +122,27 @@
     </div>
   </section>
 
-  <!-- Seção Rede Social do Repositório (com dados reais) -->
-  <section id="social" class="container">
-    <div class="repo-social">
-      <h2>Comunidade do Repositório</h2>
-      <div class="repo-actions">
-        <button id="star-button" title="Star">
-          ⭐ Star (<span id="stars-count">0</span>)
-        </button>
-        <button id="pull-button" title="Pull Request">
-          🔀 Pull Request (<span id="pulls-count">0</span>)
-        </button>
-        <button id="issue-button" title="Abrir Issue">
-          🐞 Abrir Issue (<span id="issues-count">0</span>)
-        </button>
-      </div>
-      <div class="commit-feed" id="commit-feed">
-        <!-- Os últimos 5 commits serão inseridos aqui -->
-      </div>
+  <!-- Seção de Commits Recentes -->
+  <section id="commits" class="container data-section">
+    <h2>Commits Recentes</h2>
+    <div class="data-feed" id="commits-feed">
+      <!-- Os últimos 5 commits serão inseridos aqui -->
+    </div>
+  </section>
+
+  <!-- Seção de Pull Requests Recentes -->
+  <section id="pulls" class="container data-section">
+    <h2>Pull Requests Recentes</h2>
+    <div class="data-feed" id="pulls-feed">
+      <!-- Os pull requests recentes serão inseridos aqui -->
+    </div>
+  </section>
+
+  <!-- Seção de Problemas Abertos Recentemente -->
+  <section id="issues" class="container data-section">
+    <h2>Problemas Abertos Recentemente</h2>
+    <div class="data-feed" id="issues-feed">
+      <!-- Os problemas (issues) recentes serão inseridos aqui -->
     </div>
   </section>
 
@@ -158,51 +158,64 @@
     const owner = 'azurejoga';
     const repo = 'BrasilWare';
     const commitsUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=5`;
-    const repoUrl = `https://api.github.com/repos/${owner}/${repo}`;
-    const pullsUrl = `https://api.github.com/repos/${owner}/${repo}/pulls?state=open`;
-    const issuesUrl = `https://api.github.com/repos/${owner}/${repo}/issues?state=open`;
+    const pullsUrl = `https://api.github.com/repos/${owner}/${repo}/pulls?state=open&per_page=5`;
+    const issuesUrl = `https://api.github.com/repos/${owner}/${repo}/issues?state=open&per_page=5`;
 
     async function fetchRepoData() {
       try {
-        const repoResponse = await fetch(repoUrl);
-        const repoData = await repoResponse.json();
-        document.getElementById('stars-count').textContent = repoData.stargazers_count || 0;
-
+        // Fetch de commits
         const commitsResponse = await fetch(commitsUrl);
         const commitsData = await commitsResponse.json();
-        const commitFeed = document.getElementById('commit-feed');
-        commitFeed.innerHTML = '';
+        const commitsFeed = document.getElementById('commits-feed');
+        commitsFeed.innerHTML = '';
         commitsData.forEach(commit => {
           const commitDiv = document.createElement('div');
-          commitDiv.classList.add('commit');
-          commitDiv.innerHTML = `<strong>${commit.sha.substring(0, 7)}</strong><p>${commit.commit.message}</p>`;
-          commitFeed.appendChild(commitDiv);
+          commitDiv.classList.add('data-item');
+          commitDiv.innerHTML = `
+            <strong>Commit: ${commit.sha.substring(0, 7)}</strong>
+            <p><em>Autor:</em> ${commit.commit.author.name} &ndash; ${new Date(commit.commit.author.date).toLocaleString()}</p>
+            <p><em>Mensagem:</em> ${commit.commit.message}</p>
+          `;
+          commitsFeed.appendChild(commitDiv);
         });
 
+        // Fetch de pull requests
         const pullsResponse = await fetch(pullsUrl);
         const pullsData = await pullsResponse.json();
-        document.getElementById('pulls-count').textContent = pullsData.length || 0;
+        const pullsFeed = document.getElementById('pulls-feed');
+        pullsFeed.innerHTML = '';
+        pullsData.forEach(pull => {
+          const pullDiv = document.createElement('div');
+          pullDiv.classList.add('data-item');
+          pullDiv.innerHTML = `
+            <strong>PR: ${pull.title}</strong>
+            <p><em>Aberto por:</em> ${pull.user.login}</p>
+            <p><em>Descrição:</em> ${pull.body ? pull.body.substring(0, 150) + (pull.body.length > 150 ? '...' : '') : 'Sem descrição.'}</p>
+          `;
+          pullsFeed.appendChild(pullDiv);
+        });
 
+        // Fetch de issues (excluindo pull requests)
         const issuesResponse = await fetch(issuesUrl);
         const issuesData = await issuesResponse.json();
-        const issuesCount = issuesData.filter(issue => !issue.pull_request).length;
-        document.getElementById('issues-count').textContent = issuesCount || 0;
+        const issuesFeed = document.getElementById('issues-feed');
+        issuesFeed.innerHTML = '';
+        issuesData.filter(issue => !issue.pull_request).forEach(issue => {
+          const issueDiv = document.createElement('div');
+          issueDiv.classList.add('data-item');
+          issueDiv.innerHTML = `
+            <strong>Issue: ${issue.title}</strong>
+            <p><em>Aberta por:</em> ${issue.user.login}</p>
+            <p><em>Descrição:</em> ${issue.body ? issue.body.substring(0, 150) + (issue.body.length > 150 ? '...' : '') : 'Sem descrição.'}</p>
+          `;
+          issuesFeed.appendChild(issueDiv);
+        });
       } catch (error) {
         console.error('Erro ao buscar dados do repositório:', error);
       }
     }
 
     fetchRepoData();
-
-    document.getElementById('star-button').addEventListener('click', () => {
-      window.open(`https://github.com/${owner}/${repo}/stargazers`, '_blank');
-    });
-    document.getElementById('pull-button').addEventListener('click', () => {
-      window.open(`https://github.com/${owner}/${repo}/pulls`, '_blank');
-    });
-    document.getElementById('issue-button').addEventListener('click', () => {
-      window.open(`https://github.com/${owner}/${repo}/issues`, '_blank');
-    });
   </script>
 </body>
 </html>
