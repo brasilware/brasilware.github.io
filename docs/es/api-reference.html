@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Referencia de la API - Brasilware</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --background: #ffffff;
+      --foreground: #0f172a;
+      --muted: #f1f5f9;
+      --muted-foreground: #64748b;
+      --border: #e2e8f0;
+      --radius: 0.5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #0f172a;
+        --foreground: #f8fafc;
+        --muted: #1e293b;
+        --muted-foreground: #94a3b8;
+        --border: #334155;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--foreground);
+      background-color: var(--background);
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      margin-bottom: 2rem;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: var(--primary-hover);
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin: 1.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    p, ul, ol {
+      margin-bottom: 1rem;
+    }
+
+    ul, ol {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    code, pre {
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      background-color: var(--muted);
+      border-radius: var(--radius);
+    }
+
+    code {
+      font-size: 0.9em;
+      padding: 0.2em 0.4em;
+    }
+
+    pre {
+      font-size: 0.9em;
+      padding: 1rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius);
+    }
+
+    pre code {
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .code-block {
+      background-color: var(--muted);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted-foreground);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+
+    th {
+      background-color: var(--muted);
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) td {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    .http-method {
+      display: inline-block;
+      font-weight: bold;
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius);
+      margin-right: 0.5rem;
+      font-size: 0.9em;
+    }
+
+    .get {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+    }
+
+    .post {
+      background-color: rgba(79, 70, 229, 0.1);
+      color: #4f46e5;
+    }
+
+    .put {
+      background-color: rgba(249, 115, 22, 0.1);
+      color: #f97316;
+    }
+
+    .delete {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+
+    .endpoint {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .endpoint:last-of-type {
+      border-bottom: none;
+    }
+
+    .params-table caption {
+      font-weight: bold;
+      text-align: left;
+      margin-bottom: 0.5rem;
+    }
+
+    .optional {
+      font-style: italic;
+      color: var(--muted-foreground);
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius);
+      background-color: var(--muted);
+      margin-right: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="index.html"> ← Volver a la documentación </a>
+      <h1>Referencia de la API - Brasilware</h1>
+    </header>
+
+    <main>
+      <p>Esta documentación proporciona información detallada sobre todos los puntos finales disponibles de la API de Brasilware. La API permite interactuar de manera programática con el sistema para gestionar módulos, informes, configuraciones y otras funciones.</p>
+
+      <h2>Información básica</h2>
+      <p>Todos los puntos finales de la API utilizan la siguiente URL base:</p>
+      <div class="code-block">
+        <code>https://yor-domain.com/api</code>
+      </div>
+
+      <p>Todos los pedidos y respuestas de la API están formateados en JSON, a menos que se indique lo contrario.</p>
+
+      <h2>Puntos finales</h2>
+
+      <h3>Gestión de módulos</h3>
+
+      <div class="endpoint">
+        <h4><span class="http-method get">get</span>/api/modules</h4>
+        <p>Devuelve la lista de todos los módulos instalados.</p>
+        
+        <h5>Parámetros</h5>
+        <p>Esta solicitud no requiere parámetros.</p>
+        
+        <h5>Respuesta</h5>
+        <div class="code-block">
+          <pre><code>[
+  {
+    "ID": 1,
+    "Nombre": "Analizador de JavaScript",
+    "Descripción": "Analiza el código JavaScript en busca de comportamientos maliciosos",
+    "Contenido": "<!doctype html> ...",
+    "CREADOEL": "2025-03-10t14:30:00.000Z"
+  },
+  {
+    "ID": 2,
+    "Nombre": "Visor de Tráfico",
+    "Descripción": "Ver y analizar capturas de tráfico de red",
+    "Contenido": "<!doctype html> ...",
+    "CREADOEL": "2025-03-12t09:15:00.000Z"
+  }
+]</code></pre>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <h4><span class="http-method get">get</span>/api/modules/:id</h4>
+        <p>Devuelve los detalles de un módulo específico.</p>
+        
+        <h5>Parámetros URL</h5>
+        <table class="params-table">
+          <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+          </tr>
+          <tr>
+            <td>id</td>
+            <td>Número</td>
+            <td>Identificador único del módulo</td>
+          </tr>
+        </table>
+        
+        <h5>Respuesta</h5>
+        <div class="code-block">
+          <pre><code>{
+  "ID": 1,
+  "Nombre": "Analizador de JavaScript",
+  "Descripción": "Analiza el código JavaScript en busca de comportamientos maliciosos",
+  "Contenido": "<!doctype html> ...",
+  "CREADOEL": "2025-03-10t14:30:00.000Z"
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="endpoint">
+
+<div class="endpoint">
+  <h4> <span class="http-method post"> post </span>/api/modules/upload </h4>
+  <p> Cargar e instalar un nuevo módulo desde un archivo.</p>
+  
+  <h5> Parámetros del formulario </h5>
+  <table class="params-table">
+    <tr>
+      <th> Parámetro </th>
+      <th> Tipo </th>
+      <th> Descripción </th>
+    </tr>
+    <tr>
+      <td> name </td>
+      <td> string </td>
+      <td> Nombre del módulo </td>
+    </tr>
+    <tr>
+      <td> description </td>
+      <td> string </td>
+      <td> Descripción del módulo </td>
+    </tr>
+    <tr>
+      <td> file </td>
+      <td> file </td>
+      <td> Archivo HTML del módulo </td>
+    </tr>
+  </table>
+  
+  <h5> Respuesta </h5>
+  <div class="code-block">
+    <pre><code> {
+  "ID": 3,
+  "Name": "Phishing Scanner",
+  "Description": "analiza URLs para detectar intentos de phishing",
+  "Content": "<!doctype html> ...",
+  "CREATEDAT": "2025-03-17T10:45:00.000Z"
+} </code></pre>
+  </div>
+</div>
+
+<div class="endpoint">
+  <h4> <span class="http-method post"> post </span>/API/modules/URL </h4>
+  <p> Instalar un nuevo módulo desde una URL. </p>
+  
+  <h5> Parámetros del cuerpo (JSON) </h5>
+  <table class="params-table">
+    <tr>
+      <th> Parámetro </th>
+      <th> Tipo </th>
+      <th> Descripción </th>
+    </tr>
+    <tr>
+      <td> name </td>
+      <td> string </td>
+      <td> Nombre del módulo </td>
+    </tr>
+    <tr>
+      <td> description </td>
+      <td> string </td>
+      <td> Descripción del módulo </td>
+    </tr>
+    <tr>
+      <td> URL </td>
+      <td> string </td>
+      <td> URL del módulo (debe apuntar a un archivo HTML) </td>
+    </tr>
+  </table>
+  
+  <h5> Respuesta </h5>
+  <div class="code-block">
+    <pre><code> {
+  "ID": 4,
+  "Name": "Packet Analyzer",
+  "Description": "Herramienta de análisis de paquetes de red",
+  "Content": "<!doctype html> ...",
+  "CREATEDAT": "2025-03-17T11:20:00.000Z"
+} </code></pre>
+  </div>
+</div>
+
+<div class="endpoint">
+  <h4> <span class="http-method delete"> delete </span>/api/modules/:id </h4>
+  <p> Eliminar un módulo instalado. </p>
+  
+  <h5> Parámetros de URL </h5>
+  <table class="params-table">
+    <tr>
+      <th> Parámetro </th>
+      <th> Tipo </th>
+      <th> Descripción </th>
+    </tr>
+    <tr>
+      <td> id </td>
+      <td> Número </td>
+      <td> Identificador único del módulo </td>
+    </tr>
+  </table>
+  
+  <h5> Respuesta </h5>
+  <p> 204 Sin contenido (sin cuerpo de respuesta) </p>
+</div>
+
+<h3> Gestión de informes PDF </h3>
+
+<div class="endpoint">
+  <h4> <span class="http-method get"> get </span>/api/pdfs </h4>
+  <p> Devuelve la lista de todos los informes PDF almacenados. </p>
+  
+  <h5> Parámetros </h5>
+  <p> Esta solicitud no requiere parámetros.</p>
+  
+  <h5> Respuesta </h5>
+  <div class="code-block">
+    <pre><code>[
+  {
+    "id": 1,
+    "filename": "relatorio-malware-01.pdf",
+    "filepath": "/uploads/pdfs/relatorio-malware-01.pdf",
+    "filesize": 1258000,
+    "createdAt": "2025-03-15T16:30:00.000Z",
+    "isMerged": false,
+    "sourceIds": null
+  },
+  {
+    "id": 2,
+    "filename": "merged-1234567890.pdf",
+    "filepath": "/uploads/pdfs/merged-1234567890.pdf",
+    "filesize": 3560000,
+    "createdAt": "2025-03-16T10:15:00.000Z",
+    "isMerged": true,
+    "sourceIds": "1,3,4"
+  }
+]</code></pre>
+  </div>
+</div>
+
+<div class="endpoint">
+  <h4><span class="http-method post">POST</span> /api/pdfs/upload</h4>
+  <p>Cargar uno o más archivos PDF.</p>
+  
+  <h5>Parámetros del formulario</h5>
+  <table class="params-table">
+    <tr>
+      <th>Parámetro</th>
+      <th>Tipo</th>
+      <th>Descripción</th>
+    </tr>
+    <tr>
+      <td>files</td>
+      <td>file[]</td>
+      <td>Archivos PDF a cargar (se permiten múltiples archivos)</td>
+    </tr>
+  </table>
+  
+  <h5>Respuesta</h5>
+  <div class="code-block">
+    <pre><code>[
+  {
+    "id": 5,
+    "filename": "analise-botnet-2025.pdf",
+    "filepath": "/uploads/pdfs/analise-botnet-2025.pdf",
+    "filesize": 2450000,
+    "createdAt": "2025-03-17T14:25:00.000Z",
+    "isMerged": false,
+    "sourceIds": null
+  },
+  {
+    "id": 6,
+    "filename": "ransomware-estudo-de-caso.pdf",
+    "filepath": "/uploads/pdfs/ransomware-estudo-de-caso.pdf",
+    "filesize": 1850000,
+    "createdAt": "2025-03-17T14:25:00.000Z",
+    "isMerged": false,
+    "sourceIds": null
+  }
+]</code></pre>
+  </div>
+</div>
+
+<div class="endpoint">
+  <h4><span class="http-method post">POST</span> /api/pdfs/merge</h4>
+  <p>Fusionar múltiples archivos PDF en uno solo.</p>
+  
+  <h5>Parámetros del cuerpo (JSON)</h5>
+  <table class="params-table">
+    <tr>
+      <th>Parámetro</th>
+      <th>Tipo</th>
+      <th>Descripción</th>
+    </tr>
+    <tr>
+      <td>pdfIds</td>
+      <td>number[]</td>
+      <td>Array de IDs de los PDFs a fusionar, en el orden deseado</td>
+    </tr>
+  </table>
+  
+  <h5>Respuesta</h5>
+  <div class="code-block">
+    <pre><code>{
+  "id": 7,
+  "filename": "merged-1735896042.pdf",
+  "filepath": "/uploads/pdfs/merged-1735896042.pdf",
+  "filesize": 4300000,
+  "createdAt": "2025-03-17T15:00:00.000Z",
+  "isMerged": true,
+  "sourceIds": "5,6"
+}</code></pre>
+  </div>
+</div>
+
+<div class="endpoint">
+  <h4><span class="http-method get">GET</span> /api/pdfs/download/:id</h4>
+  <p>Descargar un archivo PDF específico.</p>
+  
+  <h5> Parámetros de URL </h5>
+  <table class="params-table">
+    <tr>
+      <th> Parámetro </th>
+      <th> Tipo </th>
+      <th> Descripción </th>
+    </tr>
+    <tr>
+      <td> id </td>
+      <td> Número </td>
+      <td> Identificador único del PDF </td>
+    </tr>
+  </table>
+  
+  <h5> Respuesta </h5>
+  <p> El archivo PDF como un flujo binario (Content-Type: Application/PDF) </p>
+</div>
+
+<div class="endpoint">
+  <h4> <span class="http-method delete"> delete </span>/api/pdfs/:id </h4>
+  <p> Eliminar un archivo PDF. </p>
+  
+  <h5> Parámetros de URL </h5>
+  <table class="params-table">
+    <tr>
+      <th> Parámetro </th>
+      <th> Tipo </th>
+      <th> Descripción </th>
+    </tr>
+    <tr>
+      <td> id </td>
+      <td> Número </td>
+      <td> Identificador único del PDF </td>
+    </tr>
+  </table>
+  
+  <h5> Respuesta </h5>
+  <p> 204 Sin contenido (sin cuerpo de respuesta) </p>
+</div>
+
+<h3> Regeneración con IA </h3>
+
+<div class="endpoint">
+  <h4> <span class="http-method post"> post </span>/API/pdfs/:id/regenerate </h4>
+  <p> Regenera un informe PDF usando el análisis de IA. </p>
+  
+  <h5> Parámetros de URL
+<p> regenera un informe PDF utilizando el análisis de IA. </p>
+
+<h5> Parámetros de URL </h5>
+<table class="params-table">
+  <Tr>
+    <HH> Parámetro </Hh>
+    <Hh> Tipo </Hh>
+    <Hh> Descripción </Hh>
+  </Tr>
+  <Tr>
+    <td> id </td>
+    <td> Número </td>
+    <td> Identificador único del PDF a ser regenerado </td>
+  </Tr>
+</Table>
+
+<H5> Parámetros del cuerpo (JSON) </H5>
+<table class="params-table">
+  <Tr>
+    <HH> Parámetro </Hh>
+    <Hh> Tipo </Hh>
+    <Hh> Descripción </Hh>
+  </Tr>
+  <Tr>
+    <td> Language </td>
+    <td> string </td>
+    <td> Código de idioma para el informe (por ejemplo, "pt-br", "en-u", "es-e-e") </td>
+  </Tr>
+</Table>
+
+<H5> Respuesta </h5>
+<Div Class="Code-Block">
+  <PRE> <code> {
+"ID": 8,
+"FileName": "AI-REPORT-PT-BR-1735896500.pdf",
+"Filepath": "/uploads/pdfs/ai-report-bt-br-1735896500.pdf",
+"Filesize": 3750000,
+"CREATEDAT": "2025-03-17t16:15:00.000Z",
+"ISMERGED": FALSE,
+"Sourceids": "7"
+} </code> </PRE>
+</Div>
+</Div>
+
+<H3> Configuraciones </h3>
+
+<div class="endpoint">
+  <H4> <SPAN CLASS="http-Method get"> get </span>/API/settings </h4>
+  <P> obtiene la configuración actual del sistema. </p>
+
+  <H5> Parámetros </h5>
+  <p> Esta solicitud no requiere parámetros. </p>
+
+  <H5> Respuesta </h5>
+  <Div Class="Code-Block">
+    <PRE> <code> {
+"ID": 1,
+"Theme": "Light",
+"Language": "PT-BR",
+"Apikey": "SK-*************************************",
+"NotificatioSenabled": true
+} </code> </PRE>
+  </Div>
+</Div>
+
+<div class="endpoint">
+  <H4> <span class="http-setod put"> put </span>/api/settings </h4>
+  <p> Actualiza la configuración del sistema. </p>
+
+  <H5> Parámetros del cuerpo (JSON) </H5>
+  <table class="params-table">
+    <Tr>
+      <HH> Parámetro </Hh>
+      <Hh> Tipo </Hh>
+      <Hh> Descripción </Hh>
+    </Tr>
+    <Tr>
+      <td> theme </td>
+      <td> string </td>
+      <td> tema de la interfaz ("Light" o "Dark") </td>
+    </Tr>
+    <Tr>
+      <td> Language </td>
+      <td> string </td>
+      <td> Código del idioma de la interfaz (por ejemplo, "PT-BR", "EN-US", "ES-ES") </td>
+    </Tr>
+    <Tr>
+      <td> Apikey </td>
+      <td> string </td>
+      <td class="optional"> Clave API para integración con servicios de IA (opcional) </td>
+    </Tr>
+    <Tr>
+      <td> notificationsenable </td>
+      <td> boolean </td>
+      <td class="optional"> Habilitar/deshabilitar notificaciones (opcional) </td>
+    </Tr>
+  </table>
+
+  <H5> Respuesta </h5>
+  <Div Class="Code-Block">
+    <PRE> <code> {
+"ID": 1,
+"Theme": "Dark",
+"Language": "en-us",
+"Apikey": "SK-*************************************",
+"NotificatioSenabled": True
+} </code> </PRE>
+  </Div>
+</Div>
+
+<H2> Códigos de estado </h2>
+<p> La API de Brazilware utiliza los siguientes códigos de estado HTTP: </p>
+<table>
+  <Tr>
+    <HH> Código </Hh>
+    <Hh> Descripción </Hh>
+  </Tr>
+  <Tr>
+    <td> 200 ok </td>
+    <td> La solicitud se procesó correctamente y se devolvió el resultado. </td>
+  </Tr>
+  <Tr>
+    <td> 201 Creado </td>
+    <td> La función fue creada correctamente (se usa después de un post exitoso). </td>
+  </Tr>
+  <Tr>
+    <td> 204 Sin contenido </td>
+    <td> La solicitud se procesó correctamente, pero no hay contenido para devolver. </td>
+  </Tr>
+  <Tr>
+    <td> 400 Solicitud incorrecta </td>
+    <td> La solicitud tiene parámetros inválidos o está mal formada. </td>
+  </Tr>
+  <Tr>
+    <td> 401 No autorizado </td>
+    <td> Se necesita autenticación o ha fallado. </td>
+  </Tr>
+  <Tr>
+    <td> 403 Prohibido </td>
+    <td> El cliente no está autorizado para acceder a la función. </td>
+  </Tr>
+  <Tr>
+    <td> 404 No encontrado </td>
+    <td> No se encontró la función solicitada. </td>
+  </Tr>
+  <Tr>
+    <td> 500 Error interno del servidor </td>
+    <td> Ocurrió un error interno en el servidor. </td>
+  </Tr>
+</table>
+
+<H2> Tratamiento de errores </h2>
+<p> Cuando ocurre un error, la API devuelve un objeto JSON con información sobre el error: </p>
+<Div Class="Code-Block">
+  <PRE> <code> {
+"Error": {
+  "Message": "Descripción del error",
+  "Code": "Código_del_error"
+}
+} </code> </PRE>
+</Div>
+
+<H2> Limitaciones y buenas prácticas </h2>
+<ul>
+  <li> Implemente el lado del cliente para reducir la cantidad de solicitudes. </li>
+  <li> Para cargas de archivos grandes, considere dividirlos en partes más pequeñas. </li>
+  <li> La API puede tener límites de velocidad para evitar la sobrecarga del servidor. </li>
+</ul>
+</main>
+
+<Div Class="Nav-Container">
+  <a href="user-manual.html"> ← manual de usuario </a>
+  <a href="index.html"> índice de documentación → ​​</a>
+</div>
+
+<footer>
+  <p> © 2025 Brasilware. Todos los derechos reservados. </p>
+</footer>
+</div>
+</body>
+</html>

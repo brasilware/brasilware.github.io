@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implementation documentation of Brazilware</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --background: #ffffff;
+      --foreground: #0f172a;
+      --muted: #f1f5f9;
+      --muted-foreground: #64748b;
+      --border: #e2e8f0;
+      --radius: 0.5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #0f172a;
+        --foreground: #f8fafc;
+        --muted: #1e293b;
+        --muted-foreground: #94a3b8;
+        --border: #334155;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--foreground);
+      background-color: var(--background);
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      margin-bottom: 2rem;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: var(--primary-hover);
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin: 1.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    p, ul, ol {
+      margin-bottom: 1rem;
+    }
+
+    ul, ol {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    code, pre {
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      background-color: var(--muted);
+      border-radius: var(--radius);
+    }
+
+    code {
+      font-size: 0.9em;
+      padding: 0.2em 0.4em;
+    }
+
+    pre {
+      font-size: 0.9em;
+      padding: 1rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius);
+    }
+
+    pre code {
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .code-block {
+      background-color: var(--muted);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted-foreground);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="index.html">&larr; Back to documentation</a>
+      <h1>Implementation documentation of Brazilware</h1>
+    </header>
+
+    <main>
+      <p>This guide provides step -by -step instructions to deploy Brazilware in a production environment.</p>
+
+      <h2>Prerequisites</h2>
+      <p>Before you start deployment, make sure the server meets the following requirements:</p>
+      <ul>
+        <li>Node.js (version 18.x or higher)</li>
+        <li>NPM (version 8.x or higher)</li>
+        <li>Access to a terminal/command line</li>
+        <li>Git (optional, to clone the repository)</li>
+        <li>OpenAi API Key (for AI functionality)</li>
+      </ul>
+
+      <h2>Implementation steps</h2>
+
+      <h3>1. Get the source code</h3>
+      <p>There are two ways to get the source code:</p>
+
+      <p><strong>Option 1: Git repository cloning</strong></p>
+      <div class="code-block">
+        <code>
+          git clone https://github.com/azurejoga/brasilware.git<br>
+          cd brasilware
+        </code>
+      </div>
+
+      <p><strong>Option 2: Upload directly from files</strong></p>
+      <p>If you already have the project files, upload to the server and navigate to the project directory.</p>
+
+      <h3>2. Install dependencies</h3>
+      <p>Run the following command to install all necessary dependencies:</p>
+      <div class="code-block">
+        <code>npm install</code>
+      </div>
+      <h3>4. Build the Project</h3>
+      <p>Run the build command to generate optimized production files:</p>
+      <div class="code-block">
+        <code>npm run build</code>
+      </div>
+
+      <h3>5. Start the server</h3>
+      <p>for start the server in production mode, execute:</p>
+      <div class="code-block">
+        <code>npm run start</code>
+      </div>
+
+      <p>To keep the server running permanently, we recommend using a tool like PM2:</p>
+      <div class="code-block">
+        <code>
+          # Install PM2 globally<br>
+          npm install -g pm2<br>
+          <br>
+          # Start the application with PM2<br>
+          pm2 start npm --name "brasilware" -- start<br>
+          <br>
+          # Configure PM2 to start automatically after restarting the server<br>
+          pm2 startup<br>
+          pm2 save
+        </code>
+      </div>
+
+      <h3>6. Configure a reverse proxy (optional, but recommended)</h3>
+      <p>For better performance and safety, we recommend setting up an NGINX server as Reverse Proxy:</p>
+
+      <p><strong>NGINX Installation:</strong></p>
+      <div class="code-block">
+        <code>
+          # In systems based on Debian/Ubuntu<br>
+          sudo apt update<br>
+          sudo apt install nginx<br>
+          <br>
+          # In RHEL/centos -based systems<br>
+          sudo yum install nginx
+        </code>
+      </div>
+
+      <p><strong>NGINX configuration:</strong></p>
+      <p>Create a configuration file for your site:</p>
+      <div class="code-block">
+        <code>sudo nano /etc/nginx/sites-available/brasilware</code>
+      </div>
+
+      <p>Add the following content:</p>
+      <div class="code-block">
+        <code>
+          server {<br>
+          &nbsp;&nbsp;listen 80;<br>
+          &nbsp;&nbsp;server_name yor-domain.com www.yor-domain.com;<br>
+          <br>
+          &nbsp;&nbsp;location / {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;proxy_pass http://localhost:5000;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;proxy_http_version 1.1;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header Upgrade $http_upgrade;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header Connection 'upgrade';<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header Host $host;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;proxy_cache_bypass $http_upgrade;<br>
+          &nbsp;&nbsp;}<br>
+          }
+        </code>
+      </div>
+
+      <p>Activate the configuration and restart NGINX:</p>
+      <div class="code-block">
+        <code>
+          sudo ln -s /etc/nginx/sites-available/brasilware /etc/nginx/sites-enabled/<br>
+          sudo nginx -t<br>
+          sudo systemctl restart nginx
+        </code>
+      </div>
+
+      <h3>7. Configure https with let's Encrypt (recommended)</h3>
+      <p>For additional security, set up https using let's Encrypt:</p>
+      <div class="code-block">
+        <code>
+          sudo apt install certbot python3-certbot-nginx<br>
+          sudo certbot --nginx -d yor-domain.com -d www.yor-domain.com
+        </code>
+      </div>
+      <p>Follow the instructions to generate and configure certificates automatically.</p>
+
+      <h2>Important Directories Structure</h2>
+      <ul>
+        <li><code>client/</code>: Code of Frontend Source</li>
+        <li><code>server/</code>: Backend source code</li>
+        <li><code>shared/</code>: Schemes and shared types</li>
+        <li><code>uploads/</code>: Directory where charged files are stored</li>
+        <li><code>docs/</code>: Project Documentation</li>
+      </ul>
+
+      <h2>Maintenance and Monitoring</h2>
+
+      <h3>Logs</h3>
+      <p>To view application logs when managed by PM2:</p>
+      <div class="code-block">
+        <code>pm2 logs brasilware</code>
+      </div>
+
+      <h3>Update</h3>
+      <p>To update the app with a new version:</p>
+      <div class="code-block">
+        <code>
+          # Stop the application<br>
+          pm2 stop brasilware<br>
+          <br>
+          # Pull changes if you are using git<br>
+          git pull<br>
+          <br>
+          # Or, update the files manually if necessary<br>
+          <br>
+          # Install dependencies and reconstruct<br>
+          npm install<br>
+          npm run build<br>
+          <br>
+          # Restart the application<br>
+          pm2 restart brasilware
+        </code>
+      </div>
+
+      <h3>Backup</h3>
+      <p>It is important to make regular backup of the following directories:</p>
+      <ol>
+        <li><code>data/</code>: Contains local storage data</li>
+        <li><code>uploads/</code>: Contains all PDFs and charged modules</li>
+      </ol>
+
+      <p>Backup Command Example:</p>
+      <div class="code-block">
+        <code>
+          # Create a backup directory<br>
+          mkdir -p ~/backups<br>
+          <br>
+          # Back up data and uploads<br>
+          tar -czf ~/backups/brasilware-data-$(date +%Y%m%d).tar.gz ./data ./uploads
+        </code>
+      </div>
+
+      <h2>Common problem solving</h2>
+
+      <h3>The server does not start</h3>
+      <p>Check the error logs with:</p>
+      <div class="code-block">
+        <code>
+          npm run start > error.log 2>&1<br>
+          cat error.log
+        </code>
+      </div>
+
+      <h3>Problems with file permissions</h3>
+      <p>Make sure the user who runs the application has reading/writing permissions in the directories <code>data</code> and <code>uploads</code>:</p>
+      <div class="code-block">
+        <code>
+          sudo chown -R yor-username:yor-group ./data ./uploads<br>
+          sudo chmod -R 777 ./data ./uploads
+        </code>
+      </div>
+
+      <h3>Error in integration with the OpenAi API</h3>
+      <p>Check that the API key is correctly configured in the settings</p>
+
+      <h2>Requirements recommended resources</h2>
+      <p>For the typical use of Brazilware in a production environment, recomendamos:</p>
+      <ul>
+        <li>CPU: 1 core or more</li>
+        <li>RAM: Minimum of 1GB, recommended 2GB</li>
+        <li>Storage: 20MB or more, depending on the volume of stored PDFs and modules</li>
+        <li>Bandwidth: At least 10 Mbps for Upload/Download Reports</li>
+      </ul>
+
+      <h2>Contact and support</h2>
+      <p>For additional help, contact the development team:</p>
+      <ul>
+        <li>Open a issue  in <a href="https://github.com/azurejoga/brasilware/issues/"> github </a> </li>
+        <li> See the repository in <a href="https://github.com/azurejoga/brasilware"> github </a> </li>
+      </ul>
+    </main>
+
+    <div class="nav-container">
+      <a href="index.html">&larr; Documentation Index</a>
+      <a href="module-development.html">Module Development&rarr;</a>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Brasilware. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>	

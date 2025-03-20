@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentación de Brasilware</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --background: #ffffff;
+      --foreground: #0f172a;
+      --muted: #f1f5f9;
+      --muted-foreground: #64748b;
+      --border: #e2e8f0;
+      --radius: 0.5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #0f172a;
+        --foreground: #f8fafc;
+        --muted: #1e293b;
+        --muted-foreground: #94a3b8;
+        --border: #334155;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--foreground);
+      background-color: var(--background);
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: var(--primary-hover);
+      text-decoration: underline;
+    }
+
+    .card {
+      background-color: var(--muted);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background-color 0.2s;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+      text-decoration: none;
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--muted-foreground);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <ol>
+        <li> <a href="../index.html"> portugués/português </a> </li>
+        <li> <a href="../en/index.html"> english </a> </li>
+      </ol>
+
+      <h1>🛡️ Brasilware</h1>
+      <a href="https://brasilware.github.io"> Volver a la página principal </a>
+      <p>Plataforma de análisis de malware con herramientas modulares y eficientes</p>
+    </header>
+
+    <main>
+      <div class="card">
+        <h3>Sobre la Documentación</h3>
+        <p>
+          Bienvenido a la documentación oficial de Brasilware. Aquí encontrarás guías detalladas sobre cómo configurar, usar y desplegar la plataforma en diferentes entornos.
+        </p>
+        <div>
+          <a href="deployment.html" class="btn">Guía de Despliegue</a>
+          <a href="user-manual.html" class="btn">Manual de Usuario</a>
+          <a href="api-reference.html" class="btn">Referencia API</a>
+          <a href="module-development.html" class="btn">Desarrollo de Módulos</a>
+        </div>
+      </div>
+
+      <h2>Resumen de la Documentación</h2>
+      <div class="card">
+        <h3>Configuración</h3>
+        <p>Instrucciones paso a paso para configurar Brasilware en diferentes entornos, incluyendo requisitos del sistema y variables de entorno.</p>
+      </div>
+      <div class="card">
+        <h3>Integración con IA</h3>
+        <p>Guías para configurar y utilizar eficazmente los recursos de IA para la regeneración avanzada de informes.</p>
+      </div>
+      <div class="card">
+        <h3>Desarrollo de Módulos</h3>
+        <p>Tutoriales para crear e implementar módulos personalizados para ampliar la funcionalidad de la plataforma Brasilware.</p>
+      </div>
+
+      <h2>Características Clave</h2>
+      <ul>
+        <li><strong>Análisis Modular</strong>: Instala y ejecuta diferentes módulos de análisis para detectar y clasificar malware.</li>
+        <li><strong>Fusión de Informes</strong>: Combina múltiples informes en un solo documento.</li>
+        <li><strong>Regeneración con IA</strong>: Mejora los informes existentes utilizando inteligencia artificial.</li>
+        <li><strong>Soporte Multilingüe</strong>: Interfaz disponible en portugués, inglés y español.</li>
+      </ul>
+
+      <h2>Guía de Inicio Rápido</h2>
+      <ol>
+        <li>Configura el entorno siguiendo las instrucciones de despliegue.</li>
+        <li>Instala módulos de análisis desde la biblioteca o crea los tuyos propios.</li>
+        <li>Sube informes para su análisis y procesamiento.</li>
+        <li>Utiliza las funciones potenciadas por IA para mejorar tus informes existentes.</li>
+      </ol>
+
+      <h2>Preguntas Frecuentes</h2>
+      <div class="card">
+        <h3>¿Cómo puedo contribuir al proyecto?</h3>
+        <p>¡Las contribuciones son bienvenidas! Visita nuestro <a href="https://github.com/azurejoga/brasilware">repositorio en GitHub</a> para aprender cómo contribuir con código, traducciones o documentación.</p>
+      </div>
+      <div class="card">
+        <h3>¿Cuáles son los requisitos mínimos del sistema?</h3>
+        <p>Para ejecutar Brasilware en un entorno de producción, recomendamos al menos 1GB de RAM, 1 núcleo de CPU y 20MB de almacenamiento disponible.</p>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Brasilware. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+</body>
+</html>

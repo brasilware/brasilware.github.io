@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User manual - Brasilware</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --background: #ffffff;
+      --foreground: #0f172a;
+      --muted: #f1f5f9;
+      --muted-foreground: #64748b;
+      --border: #e2e8f0;
+      --radius: 0.5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #0f172a;
+        --foreground: #f8fafc;
+        --muted: #1e293b;
+        --muted-foreground: #94a3b8;
+        --border: #334155;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--foreground);
+      background-color: var(--background);
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      margin-bottom: 2rem;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: var(--primary-hover);
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin: 1.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    p, ul, ol {
+      margin-bottom: 1rem;
+    }
+
+    ul, ol {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    code, pre {
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      background-color: var(--muted);
+      border-radius: var(--radius);
+    }
+
+    code {
+      font-size: 0.9em;
+      padding: 0.2em 0.4em;
+    }
+
+    pre {
+      font-size: 0.9em;
+      padding: 1rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius);
+    }
+
+    pre code {
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .code-block {
+      background-color: var(--muted);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted-foreground);
+    }
+
+    .screenshot {
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin: 1.5rem 0;
+    }
+
+    .tip {
+      background-color: rgba(79, 70, 229, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .tip h4 {
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-number {
+      background-color: var(--primary);
+      color: white;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      flex-grow: 1;
+    }
+
+    .step-content h3 {
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+
+    th {
+      background-color: var(--muted);
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class = "container">
+      <a href="index.html"> ← Back to documentation </a>
+      <H1> User Manual - Brasilware </h1>
+    </Header>
+
+    <Main>
+      <p> Welcome to Brazilware's user manual, an advanced malware analysis platform with modular and efficient tools. This guide will provide all possible information to make the most of the platform functionality. </p>
+
+      <H2> Index </h2>
+      <ul>
+        <li> <a href = "#introduction"> Introduction </a> </li>
+        <li> <a href = "#prime"> First steps </a> </li>
+        <li> <a href = "#interface"> user interface </a> </li>
+        <li> <a href = "#modules"> module management </a> </li>
+        <li> <a href = "#reports"> Fusion of reports </a> </li>
+        <li> <a href = "#integration-ia"> Integration with AI </a> </li>
+        <li> <a href = "#configurations"> Settings </a> </li>
+        <li> <a href = "#solutions"> Problem solution </a> </li>
+      </ul>
+
+      <H2 ID = "Introduction"> Introduction </h2>
+      <p> Brasilware is a complete platform for malware analysis, designed to help cyber security professionals identify, analyze and document threats efficiently. A platform has a modular architecture that allows us to expand its functionality as needed. </p>
+
+      <div class = "tip">
+        <H4> What you can do with Brazilware:</h4>
+        <ul>
+          <li> Install and execute specialized analysis modules </li>
+          <li> Combine multiple reports in a single document </li>
+          <li> Governing reports with AI analysis </li>
+          <li> Customize the interface according to your preferences </li>
+        </ul>
+      </Div>
+
+      <H2 ID = "#prime"> First Steps </h2>
+
+      <H3> System Requirements </h3>
+      <P> To use Brazilware, you need: </p>
+      <ul>
+        <li> Modern web browser (Chrome, Firefox, Edge or Updated Safari) </li>
+        <li> Internet connection </li>
+      </ul>
+
+      <H3> Access to the Platform </h3>
+      <Div Class = "Step">
+        <Div Class = "Step-Number"> 1 </div>
+        <Div Class = "Passion Content">
+          <H3> Access the installation URL </H3>
+          <p> Enter the address provided by the administrator on your browser (for example, <code> http: // your-domain: 5000 </ code>). </p>
+        </Div>
+      <Div Class = "Step">
+        <Div Class = "Step-Number"> 3 </Div>
+        <Div Class = "Passion Content">
+          <h3> Explore the interface </h3>
+          <P> When accessing Brazilware, you will see the homepage with a summary of the available features. </p>
+        </Div>
+      </Div>
+
+      <H2 ID = "Interface"> User Interface </h2>
+      <p> The interface of Brazilware is divided into several main components: </p>
+
+      <H3> Navigation Bar </h3>
+      <P> located at the top of the screen, allows you to access the main highlights of the platform: </p>
+      <ul>
+        <li> <strong> Home </strong>: main page with functionality summary </li>
+        <li> <strong> Modules </strong>: Management and execution of modules </li>
+        <li> <strong> Fuse reports </strong>: PDF document combination tool </li>
+        <li> <strong> Settings </strong>: Platform Personalization </li>
+      </ul>
+
+      <H3> Main Content Area </h3>
+      <P> Occupy most of the screen and display the contents of the currently selected section. </p>
+
+      <H3> Footer </h3>
+      <p> Contains information about the version of Brazilware and useful links. </p>
+
+      <H2 ID = "Modules"> Module Management </H2>
+      <p> Modules are fundamental components of Brasilware that adds specificities to the platform. </p>
+
+      <H3> Installation of modules </h3>
+      <Div Class = "Step">
+        <Div Class = "Step-Number"> 1 </div>
+        <Div Class = "Passion Content">
+          <H3> Access the module page </h3>
+          <p> Click "Modules" on the navigation bar. </p>
+        </Div>
+      </Div>
+
+      <Div Class = "Step">
+        <Div Class = "Step-Number"> 2 </Div>
+        <Div Class = "Passion Content">
+          <H3> Click on the "Module Page" </h3>
+          <p> This will open the installation form.</p>
+        </Div>
+      </Div>
+
+      <Div Class = "Step">
+        <Div Class = "Step-Number"> 3 </Div>
+        <Div Class = "Passion Content">
+          <H3> Fill in the information </h3>
+          <p> Enter the name and description of the module. </p>
+        </Div>
+      </Div>
+
+      <Div Class = "Step">
+        <Div Class = "Step-Number"> 4 </Div>
+        <Div Class = "Passion Content">
+          <H3> Select the installation method </h3>
+          <P> Choose between uploading a file or specifying a URL. </p>
+          <ul>
+            <li> <strong> File </strong>: Click "Select File" and choose the module HTML file. </li>
+            <li> <strong> URL </strong>: Enter the full module url. </li>
+          </ul>
+        </Div>
+      </Div>
+
+      <Div Class = "Step">
+        <Div Class = "Step-Number"> 5 </Div>
+        <Div Class = "Passion Content">
+          <H3> Click on "Install Module" </h3>
+          <P> Wait until the module is successfully installed. </p>
+        </Div>
+      </Div>
+
+      <H3> Module Execution </h3>
+      <P> To execute a module installed: </p>
+      <OL>
+        <li> Access the "Modules" section </li>
+        <li> Locate the desired module on the list of installed modules </li>
+        <li> Click the "Run" button </li>
+        <li> The module will open in a sandbox and you can interact with your interface </li>
+      </ol>
+
+      <H3> Module Removal </h3>
+      <p> To remove a module: </p>
+      <OL>
+        <li> Access the "Modules" section </li>
+        <li> Locate the module on the list of installed modules </li>
+        <li> Click the "Remove" </li> button
+        <li> Confirm removal in the confirmation dialog box </li>
+      </ol>
+
+      <H2 ID = "Reports"> Reporting </h2>
+      <p> Reporting functionality allows you to combine multiple PDF documents in a single file. </p>
+
+      <H3> How to merge PDFS </H3>
+      <Div Class = "Step">
+        <Div Class = "Step-Number"> 1 </div>
+        <Div Class = "Passion Content">
+          <h3> Access the melting section </h3>
+          <p> Click "Reports Fusion" on the navigation bar. </p>
+        </Div>
+      </Div>
+
+      <Div Class = "Step">
+        <Div Class = "Step-Number"> 2 </Div>
+        <Div Class = "Passion Content">
+          <H3> Add the PDFs </H3>
+          <p> Click the "Add PDFS" button and select the files you want to match. You can select multiple files at once. </p>
+        </Div>
+      </Div>
+
+      <Div Class = "Step">
+        <Div Class = "Step-Number"> 3 </Div>
+        <Div Class = "Passion Content">
+          <H3> Organize PDFS </H3>
+          <p> Use the up and down arrow buttons to rearrange the PDF order as needed. </p>
+        </Div>
+      </Div>
+
+      <Div Class = "Step">
+        <Div Class = "Step-Number"> 4 </Div>
+        <Div Class = "Passion Content">
+          <H3> Fusion Start </h3>
+          <P> Click the "Fus Steeved PDFs" button to start the melting process.</p>
+        </Div>
+      </Div>
+
+      <Div Class = "Step">
+        <Div Class = "Step-Number"> 5 </Div>
+        <Div Class = "Passion Content">
+          <H3> Download the result </h3>
+          <P> After completion, click "Download PDF" to save the combined file. </p>
+        </Div>
+      </Div>
+
+      <H3> Message History </h3>
+      <p> All mixed PDFs appear earlier in the "Message History" section at the bottom of the page. You can: </p>
+      <ul>
+        <li> Download a previously mixed PDF </li>
+        <li> Regenerate PDF with AI (Request API Setup) </li>
+        <li> Remove PDFs that are no longer needed </li>
+      </ul>
+
+      <H2 ID = "integration"> Integration with AI </H2>
+      <p> Brazilware offers advanced malware analysis features through artificial intelligence technology. </p>
+
+      <div class = "tip">
+        <H4> Important: </h4>
+        <p> To use AI functionality, you must configure a valid API key in the system settings. </p>
+      </Div>
+
+      <h3> API configuration </h3>
+      <OL>
+        <li> Access the "Settings" section </li>
+        <li> Roll to the "API Settings" section </li>
+        <li> Enter your API key into the corresponding field </li>
+        <li> Click "Save" to apply the changes </li>
+      </ol>
+
+      <H3> Reporyization of reports with AI </H3>
+      <P> To regenerate a report using AI: </p>
+      <OL>
+        <li> Go to the "Reports Fusion" section </li>
+        <li> Locate the desired PDF in the history of mixing </li>
+        <li> Click the "Regenerate with AI" </li>
+        <li> Select the desired language for the regenerated report </li>
+        <li> Click "Regenerate Report" </li>
+        <li> Wait for the completion of the process </li>
+        <li> Download the new report enhanced by AI </li>
+      </ol>
+
+      <H2 ID = "Settings"> Settings </h2>
+      <p> A Settings Section allows you to customize various aspects of the Brasilware platform. </p>
+
+      <H3> Theme </h3>
+      <p> Brazilware offers light and dark theme. To change it: </p>
+      <OL>
+        <li> Access the "Settings" section </li>
+        <li> In the "Theme" section, select the desired mode (light or dark) </li>
+        <li> Changes are applied immediately </li>
+      </ol>
+
+      <H3> Language </h3>
+      <p> A platform with multiple languages ​​support. To change the interface language: </p>
+      <OL>
+        <li> Access the "Settings" section </li>
+        <li> In the "Language" section, select the desired language from the Suspended Menu (Portuguese, English or Spanish) </li>
+        <li> It saves automatically and changes </li>
+      </ol>
+
+      <h3> API Key </h3>
+      <p> To configure integration with AI:</p>
+      <OL>
+        <li> Access the "Settings" section </li>
+        <li> Roll to the "API Settings" section </li>
+        <li> Enter your API key into the corresponding field </li>
+        <li> Click "Save" to apply the changes </li>
+      </ol>
+
+      <Table>
+        <Tr>
+          <Hh> Configuration </Hh>
+          <Hh> Description </Hh>
+          <Hh> Possible Values ​​</H>
+        </Tr>
+        <Tr>
+          <td> Theme </td>
+          <td> Visual appearance of the platform </td>
+          <td> Light, dark </td>
+        </Tr>
+        <Tr>
+          <td> Language </td>
+          <td> user interface language </td>
+          <td> Portuguese (PT-BR), English (EN-UUS), Spanish (ES-ES) </td>
+        </Tr>
+        <Tr>
+          <td> API Key </td>
+          <td> Key for integration with AI services </td>
+          <td> Text (specific format of the OpenAi API) </td>
+        </Tr>
+      </Table>
+
+      <H2 ID = "SOLUTION-PROBLEMS"> Troubleshooting </h2>
+
+      <h3> Common problems and solutions </h3>
+
+      <H4> Module does not carry </h4>
+      <p> <strong> Solution: </strong> Check that the module is in valid HTML format. Try to reinstall the module or load from a different source. </p>
+
+      <H4> Merge PDFS ERROR </H4>
+      <p> <strong> Solution: </strong> Make sure all selected PDFs still exist in the system. Make sure the files are not corrupted and try again. </p>
+
+      <H4> Error in regeneration with AI </H4>
+      <p> <strong> Solution: </strong> Check that the API key has been defined correctly in the settings. -The key has sufficient balance and adequate permissions. </p>
+
+      <H4> The interface does not respond </h4>
+      <p> <strong> Solution: </strong> Update a page or clean the browser cache. If the problem persists, restart the browser or server. </p>
+
+      <H3> Technical Support </h3>
+      <p> If you find problems that cannot solve, contact technical support: </p>
+      <ul>
+        <li> Open a problem <a Href="https://github.com/azurejoga/brasilware/issues/"> Github </a> </li>
+        <li> See the repository at <a href = "https://github.com/azurejoga/brasilware"> Github </a> </li>
+      </ul>
+
+      <div class = "tip">
+        <H4> Troubleshooting Tip: </h4>
+        <p> When reporting a problem, including the following information: </p>
+        <ul>
+          <li> Version of Brazilware </li>
+          <li> Browser and version used </li>
+          <li> Detailed description of the problem </li>
+          <li> Steps to reproduce the problem </li>
+          <li> Screen Captures, if possible </li>
+        </ul>
+      </Div>
+    </Main>
+
+    <Div Class = "Nav-Container">
+      <a Href ="Module-Development.html"> ← Module Development </a>
+      <a href ="api-reference.html"> API reference → </a>
+    </Div>
+
+    <footer>
+      <p> © 2025 Brasilware. All rights reserved. </p>
+    </footer>
+  </Div>
+</Body>
+</html>

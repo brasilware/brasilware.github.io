@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Desenvolvimento de Módulos do Brasilware</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            max-width: 800px;
+            background-color: #f4f4f4;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #eee;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: monospace;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guia de Desenvolvimento de Módulos do Brasilware</h1>
+    <p>Este documento fornece instruções detalhadas para criar módulos personalizados para a plataforma Brasilware.</p>
+    
+    <h2>O que são Módulos do Brasilware?</h2>
+    <p>Os módulos do Brasilware são componentes HTML independentes que podem ser carregados na plataforma para adicionar funcionalidades específicas de análise de malware.</p>
+    
+    <h2>Estrutura Básica de um Módulo</h2>
+    <p>Um módulo do Brasilware é essencialmente um arquivo HTML contendo todo o código necessário para sua funcionalidade.</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Meu Módulo&lt;/title&gt;
+    &lt;script&gt;
+        console.log("Módulo carregado!");
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Meu Módulo do Brasilware&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    
+    <h2>Boas Práticas para Desenvolvimento de Módulos</h2>
+    
+    <h3>Desempenho</h3>
+    <ul>
+        <li><strong>Carregamento Assíncrono</strong>: Carregue recursos pesados de forma assíncrona.</li>
+        <li><strong>Processamento em Etapas</strong>: Divida tarefas complexas para evitar travamento.</li>
+        <li><strong>Web Workers</strong>: Para operações intensivas, use Web Workers.</li>
+    </ul>
+    
+    <h3>Segurança</h3>
+    <ul>
+        <li><strong>Sanitização de Entrada</strong>: Sempre valide e sanitize dados.</li>
+        <li><strong>Execução Isolada</strong>: O módulo será executado em um iframe isolado.</li>
+        <li><strong>Evite eval()</strong>: Nunca use eval() ou funções similares.</li>
+    </ul>
+    
+    <h3>Interface do Usuário</h3>
+    <ul>
+        <li><strong>Responsividade</strong>: O módulo deve se adaptar a diferentes telas.</li>
+        <li><strong>Feedback Visual</strong>: Forneça feedback para operações demoradas.</li>
+        <li><strong>Consistência</strong>: Siga os padrões de design do Brasilware.</li>
+    </ul>
+    
+    <h2>Exemplos de Módulos</h2>
+    <ul>
+        <li><strong>Analisador de JavaScript</strong>: Identifica padrões suspeitos.</li>
+        <li><strong>Visualizador de Tráfego de Rede</strong>: Analisa tráfego suspeito.</li>
+        <li><strong>Scanner de Phishing</strong>: Detecta tentativas de phishing.</li>
+    </ul>
+    
+    <h2>Depuração de Módulos</h2>
+    <ul>
+        <li>Use <code>console.log()</code> para registrar informações.</li>
+        <li>Inspecione o iframe com as ferramentas do navegador.</li>
+        <li>Teste seu módulo isoladamente antes da integração.</li>
+    </ul>
+    
+    <h2>Enviando seu Módulo para a Comunidade</h2>
+    <ol>
+        <li>Armazene seu módulo em um repositório GitHub público.</li>
+        <li>Documente claramente sua funcionalidade.</li>
+        <li>Forneça exemplos e casos de uso.</li>
+        <li>Submeta o link no nosso <a href="https://github.com/azurejoga/brasilware/"> github </a> </li>
+    </ol>
+    
+    <h2>FAQ para Desenvolvedores de Módulos</h2>
+    
+    <h3>Como posso acessar arquivos do sistema?</h3>
+   Você pode acessar os arquivos     por todos os meios considerados possíveis como se estivesse usando um arquivo HTML normal, só que isolado em um iframe. Então, escolha seus métodos para usar bibliotecas CDN de forma segura usando o allow script para a sandbox.
+
+    <h3>Posso usar bibliotecas externas?</h3>
+    <p>Sim, recomendando-se incluir via CDNs confiáveis e especificar versões exatas.</p>
+    
+    <h3>Como fazer chamadas de API para serviços externos?</h3>
+    <p>Use <code>fetch</code> ou <code>XMLHttpRequest</code>, respeitando a política CORS.</p>
+    
+    <h2>Recursos Adicionais</h2>
+    <ul>
+        <li>abra um problema no <a href="https://github.com/azurejoga/brasilware/issues/"> github </a> </li>
+        <li> Veja o repositório no <a href="https://github.com/azurejoga/brasilware"> github </a> </li>
+    </ul>
+
+    <div class="nav-container">
+      <a href="index.html">&larr; Índice da Documentação</a>
+      <a href="deployment.html">Guia de implantação &rarr;</a>
+    </div>
+
+
+    <footer>
+      <p>&copy; 2025 Brasilware. Todos os direitos reservados.</p>
+    </footer>
+  </div>
+
+</body>
+</html>

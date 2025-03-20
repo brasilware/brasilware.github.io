@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual de usuario - Brasilware</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --background: #ffffff;
+      --foreground: #0f172a;
+      --muted: #f1f5f9;
+      --muted-foreground: #64748b;
+      --border: #e2e8f0;
+      --radius: 0.5rem;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #0f172a;
+        --foreground: #f8fafc;
+        --muted: #1e293b;
+        --muted-foreground: #94a3b8;
+        --border: #334155;
+      }
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--foreground);
+      background-color: var(--background);
+      padding: 1rem;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    header {
+      margin-bottom: 2rem;
+    }
+    
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+      color: var(--primary-hover);
+    }
+    
+    h1 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    h2 {
+      font-size: 1.75rem;
+      margin: 1.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+      margin: 1.5rem 0 0.75rem;
+    }
+    
+    p, ul, ol {
+      margin-bottom: 1rem;
+    }
+    
+    ul, ol {
+      padding-left: 1.5rem;
+    }
+    
+    li {
+      margin-bottom: 0.5rem;
+    }
+    
+    code, pre {
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      background-color: var(--muted);
+      border-radius: var(--radius);
+    }
+    
+    code {
+      font-size: 0.9em;
+      padding: 0.2em 0.4em;
+    }
+    
+    pre {
+      font-size: 0.9em;
+      padding: 1rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius);
+    }
+    
+    pre code {
+      background-color: transparent;
+      padding: 0;
+    }
+    
+    .code-block {
+      background-color: var(--muted);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    footer {
+      margin-top: 4rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted-foreground);
+    }
+    
+    .screenshot {
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin: 1.5rem 0;
+    }
+    
+    .tip {
+      background-color: rgba(79, 70, 229, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    
+    .tip h4 {
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    
+    .step {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+    
+    .step-number {
+      background-color: var(--primary);
+      color: white;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .step-content {
+      flex-grow: 1;
+    }
+    
+    .step-content h3 {
+      margin-top: 0;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+    
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    
+    th {
+      background-color: var(--muted);
+      font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+      background-color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="index.html">← Volver a la documentación</a>
+      <h1>Manual de usuario - Brasilware</h1>
+    </header>
+
+    <main>
+      <p>Bienvenido al manual de usuario de Brasilware, una plataforma avanzada de análisis de malware con herramientas modulares y eficientes. Esta guía proporcionará toda la información necesaria para aprovechar al máximo la funcionalidad de la plataforma.</p>
+
+      <h2>Índice</h2>
+      <ul>
+        <li><a href="#introduction">Introducción</a></li>
+        <li><a href="#first-steps">Primeros pasos</a></li>
+        <li><a href="#interface">Interfaz de usuario</a></li>
+        <li><a href="#modules">Gestión de módulos</a></li>
+        <li><a href="#reports">Fusión de informes</a></li>
+        <li><a href="#integration-ia">Integración con IA</a></li>
+        <li><a href="#settings">Configuraciones</a></li>
+        <li><a href="#solutions">Solución de problemas</a></li>
+      </ul>
+
+      <h2 id="introduction">Introducción</h2>
+      <p>Brasilware es una plataforma completa para el análisis de malware, diseñada para ayudar a los profesionales de ciberseguridad a identificar, analizar y documentar amenazas de manera eficiente. La plataforma tiene una arquitectura modular que permite ampliar su funcionalidad según sea necesario.</p>
+
+      <div class="tip">
+        <h4>Lo que puedes hacer con Brasilware:</h4>
+        <ul>
+          <li>Instalar y ejecutar módulos de análisis especializados</li>
+          <li>Combinar múltiples informes en un solo documento</li>
+          <li>Generar informes con análisis mediante IA</li>
+          <li>Personalizar la interfaz de acuerdo a tus preferencias</li>
+        </ul>
+      </div>
+
+      <h2 id="first-steps">Primeros pasos</h2>
+
+      <h3>Requisitos del sistema</h3>
+      <p>Para utilizar Brasilware, necesitas:</p>
+      <ul>
+        <li>Navegador web moderno (Chrome, Firefox, Edge o Safari actualizado)</li>
+        <li>Conexión a Internet</li>
+      </ul>
+
+      <h3>Acceso a la plataforma</h3>
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Accede a la URL de instalación</h3>
+          <p>Ingresa la dirección proporcionada por el administrador en tu navegador (por ejemplo, <code>http://tu-dominio:5000</code>).</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Explora la interfaz</h3>
+          <p>Al acceder a Brasilware, verás la página principal con un resumen de las funciones disponibles.</p>
+        </div>
+      </div>
+
+      <h2 id="interface">Interfaz de usuario</h2>
+      <p>La interfaz de Brasilware se divide en varios componentes principales:</p>
+
+      <h3>Barra de navegación</h3>
+      <p>Ubicada en la parte superior de la pantalla, permite acceder a las principales funciones de la plataforma:</p>
+      <ul>
+        <li><strong>Inicio</strong>: Página principal con resumen de funcionalidades</li>
+        <li><strong>Módulos</strong>: Gestión y ejecución de módulos</li>
+        <li><strong>Fusionar informes</strong>: Herramienta para combinar documentos PDF</li>
+        <li><strong>Configuración</strong>: Personalización de la plataforma</li>
+      </ul>
+
+      <h3>Área de contenido principal</h3>
+      <p>Ocupa la mayor parte de la pantalla y muestra el contenido de la sección seleccionada.</p>
+
+      <h3>Pie de página</h3>
+      <p>Contiene información sobre la versión de Brasilware y enlaces útiles.</p>
+
+      <h2 id="modules">Gestión de módulos</h2>
+      <p>Los módulos son componentes fundamentales de Brasilware que añaden funcionalidades específicas a la plataforma.</p>
+
+      <h3>Instalación de módulos</h3>
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Accede a la página de módulos</h3>
+          <p>Haz clic en "Módulos" en la barra de navegación.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Haz clic en "Página de módulo"</h3>
+          <p>Esto abrirá el formulario de instalación.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Completa la información</h3>
+          <p>Ingresa el nombre y la descripción del módulo.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Selecciona el método de instalación</h3>
+          <p>Elige entre cargar un archivo o especificar una URL.</p>
+          <ul>
+            <li><strong>Archivo</strong>: Haz clic en "Seleccionar archivo" y elige el archivo HTML del módulo.</li>
+            <li><strong>URL</strong>: Ingresa la URL completa del módulo.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h3>Haz clic en "Instalar módulo"</h3>
+          <p>Espera hasta que el módulo se instale correctamente.</p>
+        </div>
+      </div>
+
+      <h3>Ejecución de módulos</h3>
+      <p>Para ejecutar un módulo instalado:</p>
+      <ol>
+        <li>Accede a la sección "Módulos".</li>
+        <li>Localiza el módulo deseado en la lista de módulos instalados.</li>
+        <li>Haz clic en el botón "Ejecutar".</li>
+        <li>El módulo se abrirá en un entorno seguro y podrás interactuar con él.</li>
+      </ol>
+
+      <h3>Eliminación de módulos</h3>
+      <p>Para eliminar un módulo:</p>
+      <ol>
+        <li>Accede a la sección "Módulos".</li>
+        <li>Localiza el módulo en la lista de instalados.</li>
+        <li>Haz clic en el botón "Eliminar".</li>
+        <li>Confirma la eliminación en el cuadro de diálogo de confirmación.</li>
+      </ol>
+
+      <h2 id="reports">Informes</h2>
+      <p>La funcionalidad de informes permite combinar múltiples documentos PDF en un solo archivo.</p>
+
+      <h3>Cómo fusionar PDFs</h3>
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Accede a la sección de fusión</h3>
+          <p>Haz clic en "Fusionar informes" en la barra de navegación.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Agrega los PDFs</h3>
+          <p>Haz clic en el botón "Agregar PDFs" y selecciona los archivos que deseas combinar. Puedes seleccionar múltiples archivos a la vez.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Organiza los PDFs</h3>
+          <p>Utiliza los botones de flecha arriba y abajo para reorganizar el orden de los PDFs según sea necesario.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Inicia la fusión</h3>
+          <p>Haz clic en el botón "Fusionar PDFs" para comenzar el proceso de fusión.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h3>Descarga el resultado</h3>
+          <p>Una vez finalizado, haz clic en "Descargar PDF" para guardar el archivo combinado.</p>
+        </div>
+      </div>
+
+      <h3>Historial de mensajes</h3>
+      <p>Todos los PDFs fusionados aparecen en la sección "Historial de mensajes" al final de la página. Desde allí, puedes:</p>
+      <ul>
+        <li>Descargar un PDF fusionado previamente</li>
+        <li>Regenerar el PDF con IA (previa configuración de la API)</li>
+        <li>Eliminar PDFs que ya no sean necesarios</li>
+      </ul>
+
+      <h2 id="integration-ia">Integración con IA</h2>
+      <p>Brasilware ofrece funciones avanzadas de análisis de malware mediante tecnología de inteligencia artificial.</p>
+
+      <div class="tip">
+        <h4>Importante:</h4>
+        <p>Para utilizar la funcionalidad de IA, debes configurar una clave API válida en las configuraciones del sistema.</p>
+      </div>
+
+      <h3>Configuración de API</h3>
+      <ol>
+        <li>Accede a la sección "Configuración".</li>
+        <li>Desplázate a la sección "Configuración de API".</li>
+        <li>Ingresa tu clave API en el campo correspondiente.</li>
+        <li>Haz clic en "Guardar" para aplicar los cambios.</li>
+      </ol>
+
+      <h3>Regeneración de informes con IA</h3>
+      <p>Para regenerar un informe utilizando IA:</p>
+      <ol>
+        <li>Accede a la sección "Fusionar informes".</li>
+        <li>Localiza el PDF deseado en el historial de fusión.</li>
+        <li>Haz clic en "Regenerar con IA".</li>
+        <li>Selecciona el idioma deseado para el informe regenerado.</li>
+        <li>Haz clic en "Regenerar informe".</li>
+        <li>Espera a que se complete el proceso.</li>
+        <li>Descarga el nuevo informe potenciado por IA.</li>
+      </ol>
+
+      <h2 id="settings">Configuración</h2>
+      <p>La sección de configuración te permite personalizar varios aspectos de la plataforma Brasilware.</p>
+
+      <h3>Tema</h3>
+      <p>Brasilware ofrece temas claro y oscuro. Para cambiarlo:</p>
+      <ol>
+        <li>Accede a la sección "Configuración".</li>
+        <li>En la sección "Tema", selecciona el modo deseado (claro u oscuro).</li>
+        <li>Los cambios se aplican de inmediato.</li>
+      </ol>
+
+      <h3>Idioma</h3>
+      <p>La plataforma soporta múltiples idiomas. Para cambiar el idioma de la interfaz:</p>
+      <ol>
+        <li>Accede a la sección "Configuración".</li>
+        <li>En la sección "Idioma", selecciona el idioma deseado del menú desplegable (Portugués, Inglés o Español).</li>
+        <li>El cambio se guarda automáticamente.</li>
+      </ol>
+
+      <h3>Clave API</h3>
+      <p>Para configurar la integración con IA:</p>
+      <ol>
+        <li>Accede a la sección "Configuración".</li>
+        <li>Desplázate a la sección "Configuración de API".</li>
+        <li>Ingresa tu clave API en el campo correspondiente.</li>
+        <li>Haz clic en "Guardar" para aplicar los cambios.</li>
+      </ol>
+
+      <table>
+        <tr>
+          <th>Configuración</th>
+          <th>Descripción</th>
+          <th>Valores posibles</th>
+        </tr>
+        <tr>
+          <td>Tema</td>
+          <td>Apariencia visual de la plataforma</td>
+          <td>Claro, oscuro</td>
+        </tr>
+        <tr>
+          <td>Idioma</td>
+          <td>Idioma de la interfaz de usuario</td>
+          <td>Portugués (PT-BR), Inglés (EN-US), Español (ES-ES)</td>
+        </tr>
+        <tr>
+          <td>Clave API</td>
+          <td>Clave para la integración con servicios de IA</td>
+          <td>Texto (formato específico de la API de OpenAI)</td>
+        </tr>
+      </table>
+
+      <h2 id="solutions">Solución de problemas</h2>
+
+      <h3>Problemas comunes y soluciones</h3>
+
+      <h4>El módulo no se carga</h4>
+      <p><strong>Solución:</strong> Verifica que el módulo esté en un formato HTML válido. Intenta reinstalar el módulo o cargarlo desde otra fuente.</p>
+
+      <h4>Error al fusionar PDFs</h4>
+      <p><strong>Solución:</strong> Asegúrate de que todos los PDFs seleccionados sigan existiendo en el sistema. Verifica que los archivos no estén corruptos y vuelve a intentarlo.</p>
+
+      <h4>Error en la regeneración con IA</h4>
+      <p><strong>Solución:</strong> Comprueba que la clave API esté configurada correctamente en las configuraciones y que tenga saldo suficiente y los permisos adecuados.</p>
+
+      <h4>La interfaz no responde</h4>
+      <p><strong>Solución:</strong> Actualiza la página o limpia la caché del navegador. Si el problema persiste, reinicia el navegador o el servidor.</p>
+
+      <h3>Soporte técnico</h3>
+      <p>Si encuentras problemas que no puedes solucionar, contacta al soporte técnico:</p>
+      <ul>
+        <li>Abrir un problema en <a href="https://github.com/azurejoga/brasilware/issues/" target="_blank">Github</a></li>
+        <li>Ver el repositorio en <a href="https://github.com/azurejoga/brasilware" target="_blank">Github</a></li>
+      </ul>
+
+      <div class="tip">
+        <h4>Consejo para la solución de problemas:</h4>
+        <p>Al reportar un problema, incluye la siguiente información:</p>
+        <ul>
+          <li>Versión de Brasilware</li>
+          <li>Navegador y versión utilizados</li>
+          <li>Descripción detallada del problema</li>
+          <li>Pasos para reproducir el problema</li>
+          <li>Capturas de pantalla, si es posible</li>
+        </ul>
+      </div>
+    </main>
+
+    <div class="nav-container">
+      <a href="Module-Development.html">← Desarrollo de módulos</a>
+      <a href="api-reference.html">Referencia API →</a>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Brasilware. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+</body>
+</html>

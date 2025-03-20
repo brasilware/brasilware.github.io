@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentação de Implantação do Brasilware</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --background: #ffffff;
+      --foreground: #0f172a;
+      --muted: #f1f5f9;
+      --muted-foreground: #64748b;
+      --border: #e2e8f0;
+      --radius: 0.5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #0f172a;
+        --foreground: #f8fafc;
+        --muted: #1e293b;
+        --muted-foreground: #94a3b8;
+        --border: #334155;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--foreground);
+      background-color: var(--background);
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      margin-bottom: 2rem;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: var(--primary-hover);
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin: 1.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    p, ul, ol {
+      margin-bottom: 1rem;
+    }
+
+    ul, ol {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    code, pre {
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      background-color: var(--muted);
+      border-radius: var(--radius);
+    }
+
+    code {
+      font-size: 0.9em;
+      padding: 0.2em 0.4em;
+    }
+
+    pre {
+      font-size: 0.9em;
+      padding: 1rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius);
+    }
+
+    pre code {
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .code-block {
+      background-color: var(--muted);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted-foreground);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="index.html">&larr; Voltar para Documentação</a>
+      <h1>Documentação de Implantação do Brasilware</h1>
+    </header>
+
+    <main>
+      <p>Este guia fornece instruções passo a passo para implantar o Brasilware em um ambiente de produção.</p>
+
+      <h2>Pré-requisitos</h2>
+      <p>Antes de começar a implantação, certifique-se de que o servidor atenda aos seguintes requisitos:</p>
+      <ul>
+        <li>Node.js (versão 18.x ou superior)</li>
+        <li>npm (versão 8.x ou superior)</li>
+        <li>Acesso a um terminal/linha de comando</li>
+        <li>Git (opcional, para clonar o repositório)</li>
+        <li>Chave de API da OpenAI (para funcionalidades de IA)</li>
+      </ul>
+
+      <h2>Etapas de Implantação</h2>
+
+      <h3>1. Obter o Código Fonte</h3>
+      <p>Existem duas maneiras de obter o código fonte:</p>
+
+      <p><strong>Opção 1: Clonar do repositório Git</strong></p>
+      <div class="code-block">
+        <code>
+          git clone https://github.com/azurejoga/brasilware.git<br>
+          cd brasilware
+        </code>
+      </div>
+
+      <p><strong>Opção 2: Fazer upload direto dos arquivos</strong></p>
+      <p>Se você já tem os arquivos do projeto, faça upload para o servidor e navegue até o diretório do projeto.</p>
+
+      <h3>2. Instalar Dependências</h3>
+      <p>Execute o seguinte comando para instalar todas as dependências necessárias:</p>
+      <div class="code-block">
+        <code>npm install</code>
+      </div>
+      <h3>4. Construir o Projeto</h3>
+      <p>Execute o comando de build para gerar os arquivos de produção otimizados:</p>
+      <div class="code-block">
+        <code>npm run build</code>
+      </div>
+
+      <h3>5. Iniciar o Servidor</h3>
+      <p>Para iniciar o servidor em modo de produção, execute:</p>
+      <div class="code-block">
+        <code>npm run start</code>
+      </div>
+
+      <p>Para manter o servidor em execução permanentemente, recomendamos usar uma ferramenta como PM2:</p>
+      <div class="code-block">
+        <code>
+          # Instalar PM2 globalmente<br>
+          npm install -g pm2<br>
+          <br>
+          # Iniciar o aplicativo com PM2<br>
+          pm2 start npm --name "brasilware" -- start<br>
+          <br>
+          # Configurar PM2 para iniciar automaticamente após reinicialização do servidor<br>
+          pm2 startup<br>
+          pm2 save
+        </code>
+      </div>
+
+      <h3>6. Configurar um Proxy Reverso (Opcional, mas Recomendado)</h3>
+      <p>Para melhor desempenho e segurança, recomendamos configurar um servidor Nginx como proxy reverso:</p>
+
+      <p><strong>Instalação do Nginx:</strong></p>
+      <div class="code-block">
+        <code>
+          # Em sistemas baseados em Debian/Ubuntu<br>
+          sudo apt update<br>
+          sudo apt install nginx<br>
+          <br>
+          # Em sistemas baseados em RHEL/CentOS<br>
+          sudo yum install nginx
+        </code>
+      </div>
+
+      <p><strong>Configuração do Nginx:</strong></p>
+      <p>Crie um arquivo de configuração para o seu site:</p>
+      <div class="code-block">
+        <code>sudo nano /etc/nginx/sites-available/brasilware</code>
+      </div>
+
+      <p>Adicione o seguinte conteúdo:</p>
+      <div class="code-block">
+        <code>
+          server {<br>
+          &nbsp;&nbsp;listen 80;<br>
+          &nbsp;&nbsp;server_name seu-dominio.com www.seu-dominio.com;<br>
+          <br>
+          &nbsp;&nbsp;location / {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;proxy_pass http://localhost:5000;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;proxy_http_version 1.1;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header Upgrade $http_upgrade;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header Connection 'upgrade';<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header Host $host;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;proxy_cache_bypass $http_upgrade;<br>
+          &nbsp;&nbsp;}<br>
+          }
+        </code>
+      </div>
+
+      <p>Ative a configuração e reinicie o Nginx:</p>
+      <div class="code-block">
+        <code>
+          sudo ln -s /etc/nginx/sites-available/brasilware /etc/nginx/sites-enabled/<br>
+          sudo nginx -t<br>
+          sudo systemctl restart nginx
+        </code>
+      </div>
+
+      <h3>7. Configurar HTTPS com Let's Encrypt (Recomendado)</h3>
+      <p>Para segurança adicional, configure HTTPS usando Let's Encrypt:</p>
+      <div class="code-block">
+        <code>
+          sudo apt install certbot python3-certbot-nginx<br>
+          sudo certbot --nginx -d seu-dominio.com -d www.seu-dominio.com
+        </code>
+      </div>
+      <p>Siga as instruções para gerar e configurar os certificados automaticamente.</p>
+
+      <h2>Estrutura de Diretórios Importantes</h2>
+      <ul>
+        <li><code>client/</code>: Código fonte do frontend</li>
+        <li><code>server/</code>: Código fonte do backend</li>
+        <li><code>shared/</code>: Esquemas e tipos compartilhados</li>
+        <li><code>uploads/</code>: Diretório onde os arquivos carregados são armazenados</li>
+        <li><code>docs/</code>: Documentação do projeto</li>
+      </ul>
+
+      <h2>Manutenção e Monitoramento</h2>
+
+      <h3>Logs</h3>
+      <p>Para visualizar os logs do aplicativo quando gerenciado pelo PM2:</p>
+      <div class="code-block">
+        <code>pm2 logs brasilware</code>
+      </div>
+
+      <h3>Atualização</h3>
+      <p>Para atualizar o aplicativo com uma nova versão:</p>
+      <div class="code-block">
+        <code>
+          # Parar o aplicativo<br>
+          pm2 stop brasilware<br>
+          <br>
+          # Puxar as alterações se estiver usando Git<br>
+          git pull<br>
+          <br>
+          # Ou, atualizar os arquivos manualmente se necessário<br>
+          <br>
+          # Instalar dependências e reconstruir<br>
+          npm install<br>
+          npm run build<br>
+          <br>
+          # Reiniciar o aplicativo<br>
+          pm2 restart brasilware
+        </code>
+      </div>
+
+      <h3>Backup</h3>
+      <p>É importante fazer backup regular dos seguintes diretórios:</p>
+      <ol>
+        <li><code>data/</code>: Contém os dados do armazenamento local</li>
+        <li><code>uploads/</code>: Contém todos os PDFs e módulos carregados</li>
+      </ol>
+
+      <p>Exemplo de comando de backup:</p>
+      <div class="code-block">
+        <code>
+          # Criar um diretório para backups<br>
+          mkdir -p ~/backups<br>
+          <br>
+          # Fazer backup dos dados e uploads<br>
+          tar -czf ~/backups/brasilware-data-$(date +%Y%m%d).tar.gz ./data ./uploads
+        </code>
+      </div>
+
+      <h2>Resolução de Problemas Comuns</h2>
+
+      <h3>O servidor não inicia</h3>
+      <p>Verifique os logs de erro com:</p>
+      <div class="code-block">
+        <code>
+          npm run start > error.log 2>&1<br>
+          cat error.log
+        </code>
+      </div>
+
+      <h3>Problemas com permissões de arquivos</h3>
+      <p>Certifique-se de que o usuário que executa o aplicativo tenha permissões de leitura/escrita nos diretórios <code>data</code> e <code>uploads</code>:</p>
+      <div class="code-block">
+        <code>
+          sudo chown -R seu-usuario:seu-grupo ./data ./uploads<br>
+          sudo chmod -R 777 ./data ./uploads
+        </code>
+      </div>
+
+      <h3>Erro na integração com a API do OpenAI</h3>
+      <p>Verifique se a chave da API está corretamente configurada nas configurações</p>
+
+      <h2>Requisitos de Recursos Recomendados</h2>
+      <p>Para o uso típico do Brasilware em um ambiente de produção, recomendamos:</p>
+      <ul>
+        <li>CPU: 1 núcleo ou mais</li>
+        <li>RAM: Mínimo de 1GB, recomendado 2GB</li>
+        <li>Armazenamento: 20MB ou mais, dependendo do volume de PDFs e módulos armazenados</li>
+        <li>Largura de banda: Pelo menos 10 Mbps para upload/download de relatórios</li>
+      </ul>
+
+      <h2>Contato e Suporte</h2>
+      <p>Para obter ajuda adicional, entre em contato com a equipe de desenvolvimento:</p>
+      <ul>
+        <li>abra um problema no <a href="https://github.com/azurejoga/brasilware/issues/"> github </a> </li>
+        <li> Veja o repositório no <a href="https://github.com/azurejoga/brasilware"> github </a> </li>
+      </ul>
+    </main>
+
+    <div class="nav-container">
+      <a href="index.html">&larr; Índice da Documentação</a>
+      <a href="module-development.html">Desenvolvimento de Módulos &rarr;</a>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Brasilware. Todos os direitos reservados.</p>
+    </footer>
+  </div>
+</body>
+</html>

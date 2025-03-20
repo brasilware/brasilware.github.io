@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brasilware Module Development Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            max-width: 800px;
+            background-color: #f4f4f4;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #eee;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: monospace;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Brasilware Module Development Guide</h1>
+    <p>This document provides detailed instructions for creating custom modules for the Brasilware platform.</p>
+    
+    <h2>What are Brasilware Modules?</h2>
+    <p>Brasilware modules are independent HTML components that can be loaded onto the platform to add specific malware analysis functionalities.</p>
+    
+    <h2>Basic Structure of a Module</h2>
+    <p>A Brasilware module is essentially an HTML file containing all the necessary code for its functionality.</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Module&lt;/title&gt;
+    &lt;script&gt;
+        console.log("Module loaded!");
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;My Brasilware Module&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    
+    <h2>Best Practices for Module Development</h2>
+    
+    <h3>Performance</h3>
+    <ul>
+        <li><strong>Asynchronous Loading</strong>: Load heavy resources asynchronously.</li>
+        <li><strong>Step-by-Step Processing</strong>: Break down complex tasks to avoid freezing.</li>
+        <li><strong>Web Workers</strong>: Use Web Workers for intensive operations.</li>
+    </ul>
+    
+    <h3>Security</h3>
+    <ul>
+        <li><strong>Input Sanitization</strong>: Always validate and sanitize data.</li>
+        <li><strong>Isolated Execution</strong>: The module will run in an isolated iframe.</li>
+        <li><strong>Avoid eval()</strong>: Never use eval() or similar functions.</li>
+    </ul>
+    
+    <h3>User Interface</h3>
+    <ul>
+        <li><strong>Responsiveness</strong>: The module should adapt to different screens.</li>
+        <li><strong>Visual Feedback</strong>: Provide feedback for long-running operations.</li>
+        <li><strong>Consistency</strong>: Follow Brasilware design standards.</li>
+    </ul>
+    
+    <h2>Example Modules</h2>
+    <ul>
+        <li><strong>JavaScript Analyzer</strong>: Identifies suspicious patterns.</li>
+        <li><strong>Network Traffic Viewer</strong>: Analyzes suspicious traffic.</li>
+        <li><strong>Phishing Scanner</strong>: Detects phishing attempts.</li>
+    </ul>
+    
+    <h2>Module Debugging</h2>
+    <ul>
+        <li>Use <code>console.log()</code> to log information.</li>
+        <li>Inspect the iframe using browser developer tools.</li>
+        <li>Test your module in isolation before integration.</li>
+    </ul>
+    
+    <h2>Submitting Your Module to the Community</h2>
+    <ol>
+        <li>Host your module in a public GitHub repository.</li>
+        <li>Clearly document its functionality.</li>
+        <li>Provide examples and use cases.</li>
+        <li>Submit the link to our <a href="https://github.com/azurejoga/brasilware/"> GitHub </a></li>
+    </ol>
+    
+    <h2>FAQ for Module Developers</h2>
+    
+    <h3>How can I access system files?</h3>
+    <p>You can access files using all possible means as if you were using a normal HTML file, but isolated in an iframe. Choose your methods carefully and use CDN libraries securely with the sandbox allow script.</p>
+    
+    <h3>Can I use external libraries?</h3>
+    <p>Yes, it is recommended to include them via trusted CDNs and specify exact versions.</p>
+    
+    <h3>How do I make API calls to external services?</h3>
+    <p>Use <code>fetch</code> or <code>XMLHttpRequest</code>, respecting CORS policy.</p>
+    
+    <h2>Additional Resources</h2>
+    <ul>
+        <li>Open an issue on <a href="https://github.com/azurejoga/brasilware/issues/"> GitHub </a></li>
+        <li>Check the repository on <a href="https://github.com/azurejoga/brasilware"> GitHub </a></li>
+    </ul>
+
+    <div class="nav-container">
+      <a href="index.html">&larr; Documentation Index</a>
+      <a href="deployment.html">Deployment Guide &rarr;</a>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Brasilware. All rights reserved.</p>
+    </footer>
+  </div>
+
+</body>
+</html>
