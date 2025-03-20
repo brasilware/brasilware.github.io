@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://brasilware.github.io/</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/index.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/index-en.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/index-es.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/en/index.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/es/index.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/deployment.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/user-manual.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/api-reference.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/module-development.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/index.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/en/deployment.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/en/user-manual.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/en/api-reference.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/es/deployment.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/es/user-manual.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/es/api-reference.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/en/Module-Development.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://brasilware.github.io/docs/es/Module-Development.html</loc>
+  <lastmod>2025-03-20T16:27:15+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+
+
+</urlset>
